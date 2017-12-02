@@ -24,13 +24,14 @@ class AssignmentList {
         ev.preventDefault()
         const f = ev.target
 
+        //the a stands for assignment i.e. assignment Type == aType
         const assignment = {
             course: f.course.value,
-            type: f.type.value,
+            type: f.aType.value,
             dueDate: f.dueDate.value,
             dueTime: f.dueTime.value,
-            description: f.description.value,
-            name: name
+            description: f.aDescription.value,
+            name: aName
         }
 
 
@@ -38,8 +39,8 @@ class AssignmentList {
     }
 
     //use this to add new entries from the database
-    addAssignment(course, type, dueDate, dueTime, description, name) {
-        var assignment = Assignment(course, type, dueDate, dueTime, description, name);
+    addAssignment(course, aType, dueDate, dueTime, aDescription, name) {
+        var assignment = Assignment(course, aType, dueDate, dueTime, aDescription, name);
         
         //if the class doesn't already exist, add it to the hashmap
         if (!this.myClasses[course]) {

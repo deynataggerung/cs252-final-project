@@ -38,7 +38,10 @@ function logout() {
 function getUserData() {
 	var ref = myDataRef.ref(userID);
 	try {
-		ref.orderByChild("");
+		ref.orderByChild("dueDate").on("child_added", function(snapshot) {
+			addAssignment(snapshot.val().course, snapshot.val().aType, snapshot.val().dueDate, snapshot.val().dueTime, snapshot.val().aDescription, snapshot.val().aName)
+		})
+
 	}
 	catch(err) {
 		addUser(userID);
