@@ -12,8 +12,7 @@ class Assignment {
 
 class AssignmentList {
     constructor() {
-        this.assignments = []
-        this.classes = []
+        this.myClasses = {}
         this.setupEventListeners()
     }
 
@@ -34,6 +33,19 @@ class AssignmentList {
             name: name
         }
 
+
         //save to stuff
+    }
+
+    //use this to add new entries from the database
+    addAssignment(course, type, dueDate, dueTime, description, name) {
+        var assignment = Assignment(course, type, dueDate, dueTime, description, name);
+        
+        //if the class doesn't already exist, add it to the hashmap
+        if (!this.myClasses[course]) {
+            this.myClasses[course] = []
+        }
+        
+        this.myClasses[course].add(assignment);
     }
 }
