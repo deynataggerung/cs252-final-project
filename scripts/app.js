@@ -82,7 +82,7 @@ function login(e) {
         ).catch(function(error) {
             console.log("login failed")
         });
-    userID = 11111
+    userID = document.getElementById("username").value
 
     getUserData();
     addToPage();
@@ -119,7 +119,7 @@ function getUserData() {
 }
 
 function newAssignment(jsonData) {
-    var usersRef = myDataRef.child("users");
+    var usersRef = myDataRef.child("users").child(userID);
     usersRef.set(jsonData)
 }
 
