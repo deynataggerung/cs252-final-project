@@ -1,11 +1,24 @@
+//basic data structures, include at beginning
+var config = {
+    apiKey: "AIzaSyAJ54W93fUTyDuFc3A7OVggU0O97TKratM",
+    authDomain: "cs252-final.firebaseapp.com",
+    databaseURL: "https://cs252-final.firebaseio.com",
+    projectId: "cs252-final",
+    storageBucket: "cs252-final.appspot.com",
+    messagingSenderId: "635663087906"};
+
+firebase.initializeApp(config);
+
+var myDataRef = firebase.database().ref();
+
 class Assignment {
-    constructor(course, type, dueDate, dueTime, description, name) {
+    constructor(course, aType, dueDate, dueTime, aDescription, aName) {
         var course = course
-        var type = type
+        var aType = aType
         var dueDate = dueDate
         var dueTime = dueTime
-        var description = description
-        var name = name
+        var aDescription = aDescription
+        var aName = aName
     }
 
 }
@@ -13,12 +26,12 @@ class Assignment {
 class AssignmentList {
     constructor() {
         this.myClasses = {}
-        this.setupEventListeners()
+        //this.setupEventListeners()
     }
 
-    setupEventListeners() {
-        document.querySelector('#add-assignment').addEventListener(this.handleAddAssignment.bind(this))
-    }
+    //setupEventListeners() {
+    //    document.querySelector('#add-assignment').addEventListener(this.handleAddAssignment.bind(this))
+    //}
 
     handleAddAssignment(ev) {
         ev.preventDefault()
@@ -34,8 +47,8 @@ class AssignmentList {
             name: aName
         }
 
-
         //save to stuff
+        newAssignment(assignment)
     }
 
     //use this to add new entries from the database
@@ -51,49 +64,50 @@ class AssignmentList {
     }
 }
 
-
-//basic data structures, include at beginning
-var myDataRef = new Firebase("cs252-final.firebaseapp.com");
-var authData = myDataRef.getAuth();
-var assignList = AssignmentList();
+//variable setup
+var authData = firebase.auth();
+var assignList = new AssignmentList();
 
 //storage for a username and password, replace this with whatever makes sense
 var userID;
-
-//function that transforms the page on successful authentication
-function loginHandler(error, authData) {
-    if (error) {
-        continue;
-    }
-    else if (authData) {
-        userID = auth.getUid();
-
-        //do things to page (hide/show/etc)
-    }
-}
 
 //call this function to login with values in the "username" and "password" text boxes
 //this will call the above function
 function login(e) {
     e.preventDefault();
-    myDataRef.authWithPassword({
-        "email": document.getElementById("username").value,
-        "password": document.getElementById("password").value
-        }, authHandler);
-    })
-    return false;
+    firebase.auth().signInWithEmailAndPassword(
+        document.getElementById("username").value,
+        document.getElementById("password").value
+        ).catch(function(error) {
+            console.log("login failed")
+        });
+    userID = 11111
+
+    getUserData();
+    addToPage();
+    return true;
 }
 
 //logs out and refreshes the page to get rid of any stored data
 function logout() {
-    myDataRef.unauth();
+    firebase.auth().signOut().then(function() {
+        //signed out
+    }).catch(function(error) {
+        //couldn't sign out
+    });
     document.location.reload(true);
 }
 
+function addToPage() {
+    for (i = 0; i < )
+}
+
+//a setup function to be called on login that gets all the user's data
 function getUserData() {
     var ref = myDataRef.ref(userID);
     try {
         ref.orderByChild("dueDate").on("child_added", function(snapshot) {
+            //doesn't check for duplicates
             assignList.addAssignment(snapshot.val().course, snapshot.val().aType, snapshot.val().dueDate, snapshot.val().dueTime, snapshot.val().aDescription, snapshot.val().aName)
         })
 
@@ -103,9 +117,18 @@ function getUserData() {
     }
 }
 
+function newAssignment(jsonData) {
+    var usersRef = myDataRef.child("users");
+    usersRef.set(jsonData)
+}
+
 //make all checks and update things run from inside this.
 $('document').ready(function() {
     $('#login').click(login);
+    $('#logout').click(logout);
+    $('#send').click(assignList.handleAddAssignment)
+
+
 
 
 })
