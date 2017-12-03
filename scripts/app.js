@@ -14,11 +14,11 @@ var myDataRef = firebase.database().ref();
 class Assignment {
     constructor(course, aType, dueDate, dueTime, aDescription, aName) {
         var course = course
+        var aName = aName
         var aType = aType
         var dueDate = dueDate
         var dueTime = dueTime
         var aDescription = aDescription
-        var aName = aName
     }
 
 }
