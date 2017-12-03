@@ -56,12 +56,7 @@ class AssignmentList {
     addAssignment(snapshot) {
         var assignment = Assignment(snapshot.course, snapshot.aType, snapshot.dueDate, snapshot.dueTime, snapshot.aDescription, snapshot.name);
         
-        //if the class doesn't already exist, add it to the hashmap
-        if (!this.myClasses[course]) {
-            this.myClasses[course] = []
-        }
-        
-        this.myClasses[course].add(assignment);
+        this.myClasses.put(snapshot.course, assignment);
     }
 }
 
