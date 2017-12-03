@@ -53,8 +53,8 @@ class AssignmentList {
     }
 
     //use this to add new entries from the database
-    addAssignment(course, aType, dueDate, dueTime, aDescription, name) {
-        var assignment = Assignment(course, aType, dueDate, dueTime, aDescription, name);
+    addAssignment(snapshot) {
+        var assignment = Assignment(snapshot.course, snapshot.aType, snapshot.dueDate, snapshot.dueTime, snapshot.aDescription, snapshot.name);
         
         //if the class doesn't already exist, add it to the hashmap
         if (!this.myClasses[course]) {
@@ -109,7 +109,7 @@ function getUserData() {
     try {
         ref.orderByChild("dueDate").on("child_added", function(snapshot) {
             //doesn't check for duplicates
-            assignList.addAssignment(snapshot.val().course, snapshot.val().aType, snapshot.val().dueDate, snapshot.val().dueTime, snapshot.val().aDescription, snapshot.val().aName)
+            assignList.addAssignment(snapshot.val())
         })
 
     }
@@ -125,9 +125,11 @@ function newAssignment(jsonData) {
 
 //make all checks and update things run from inside this.
 $('document').ready(function() {
-    $('#login').click(login);
-    $('#logout').click(logout);
+    $('#login').click(login)
+    $('#logout').click(logout)
     $('#send').click(assignList.handleAddAssignment)
+
+    firebase.onUpdate(assignList.addAssignment)
 
 
 
