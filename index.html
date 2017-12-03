@@ -108,9 +108,21 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
             <div class="w3-container w3-padding">
               <h6 class="w3-opacity">Add an Assignment here</h6>
               <form id="add-assignment">
-                <p> Assignment name: <input type="text" name="name" placeholder="Title"></p>
+                <p> Class: <input list="courses" name="course">
+                <datalist id="courses"> <!-- Here go classes (via jquery) --></datalist></p>
+                <p> Assignment Type: <input list="aTypes" name="aType">
+                <datalist id="aTypes">
+                  <option value="Homework">
+                  <option value="Lab">
+                  <option value="Presentation">
+                  <option value="Quiz">
+                  <option value="Exam">
+                  <option value="Other">
+                </datalist></p>
+                <p> Assignment Name: <input type="text" name="name" placeholder="Title"></p>
                 <p> Due date: <input type="date" name="date"></p>
                 <p> Due date: <input type="time" name="time"></p>
+                <p> Description: <textarea name="description" rows="3" cols="20"></textarea></p>
                 <input type="submit" class="w3-button w3-theme" value="Add">
               </form> 
             </div>

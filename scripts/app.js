@@ -11,6 +11,7 @@ firebase.initializeApp(config);
 
 var myDataRef = firebase.database().ref();
 
+// The data structure for an individual assignment
 class Assignment {
     constructor(course, aType, dueDate, dueTime, aDescription, aName) {
         var course = course
@@ -20,9 +21,9 @@ class Assignment {
         var dueTime = dueTime
         var aDescription = aDescription
     }
-
 }
 
+// The data structure for the Assignment List on the current page
 class AssignmentList {
     constructor() {
         this.myClasses = {}
