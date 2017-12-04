@@ -93,10 +93,11 @@ function logout() {
     });
     document.location.reload(true);
 }
-
+/*
 function addToPage() {
     for (i = 0; i < )
 }
+*/
 
 //a setup function to be called on login that gets all the user's data
 function getUserData() {
@@ -118,6 +119,13 @@ function newAssignment(jsonData) {
     usersRef.set(jsonData)
 }
 
+function populateAssignmentList() {
+    for (let i in assignList.myClasses) {
+        $('#assignment-list').append('<div>' + i[name] + '</div>')
+
+    }
+}
+
 //make all checks and update things run from inside this.
 $('document').ready(function() {
     $('#login').click(login)
@@ -126,7 +134,11 @@ $('document').ready(function() {
 
     firebase.onUpdate(assignList.addAssignment)
 
+    let testList = new Assignment('English', 'Lab', '12/13/03', '12:39', 'none','Lab 3')
 
+    assignList.myClasses.put(testList);
+    console.log(assignList)
+    populateAssignmentList;
 
 
 })
