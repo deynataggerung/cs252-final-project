@@ -118,6 +118,7 @@ function newAssignment(jsonData) {
     usersRef.set(jsonData)
 }
 
+// Function to populate the HTML List of assignments
 function populateAssignmentList() {
     for (let i in assignList.myClasses) {
         $('#assignment-list').append('<div>' + i[name] + '</div>')
@@ -133,6 +134,7 @@ $('document').ready(function() {
 
     firebase.onUpdate(assignList.addAssignment)
 
+    // Temp test code for populateAssignmentList()
     let testList = new Assignment('English', 'Lab', '12/13/03', '12:39', 'none','Lab 3')
 
     assignList.myClasses.put(testList);
