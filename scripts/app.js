@@ -98,7 +98,6 @@ function addToPage() {
     for (i = 0; i < )
 }
 */
-
 //a setup function to be called on login that gets all the user's data
 function getUserData() {
     var ref = myDataRef.ref(userID);
