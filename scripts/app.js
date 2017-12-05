@@ -121,13 +121,24 @@ function newAssignment(jsonData) {
 function populateAssignmentList() {
     console.log(assignList.myClasses)
     for (let i in assignList.myClasses) {
-        console.log(i.aName)
+        console.log(i)
+        /*
         var node = document.createElement("LI");                 // Create a <li> node
         var textnode = document.createTextNode("Water");         // Create a text node
         node.appendChild(textnode);                              // Append the text to <li>
 
         console.log(document.getElementById('assignment-list'))
         document.getElementById('assignment-list').appendChild(node)
+        */
+
+        $('#assignment-list').append('<li>')
+        $('#assignment-list').append('<span class="ass-aName">' + assignList.myClasses[i].aName + '</span>')
+        $('#assignment-list').append('<span class="ass-course">' + assignList.myClasses[i].course + '</span>')
+        $('#assignment-list').append('<span class="ass-aType">' + assignList.myClasses[i].aType + '</span>')
+        $('#assignment-list').append('<span class="ass-dueDate">' + assignList.myClasses[i].dueDate + '</span>')
+        $('#assignment-list').append('<span class="ass-dueTime">' + assignList.myClasses[i].dueTime + '</span>')
+        $('#assignment-list').append('<span class="ass-desc">' + assignList.myClasses[i].description + '</span>')
+        $('#assignment-list').append('</li>')
 
     }
 }
@@ -151,4 +162,4 @@ function init() {
     populateAssignmentList();
 }
 
-    window.onload = init;
+window.onload = init;
