@@ -10,16 +10,15 @@ var config = {
 firebase.initializeApp(config);
 
 var myDataRef = firebase.database().ref();
-
 // The data structure for an individual assignment
 class Assignment {
     constructor(course, aType, dueDate, dueTime, aDescription, aName) {
-        var course = course
-        var aName = aName
-        var aType = aType
-        var dueDate = dueDate
-        var dueTime = dueTime
-        var aDescription = aDescription
+        this.course = course
+        this.aName = aName
+        this.aType = aType
+        this.dueDate = dueDate
+        this.dueTime = dueTime
+        this.aDescription = aDescription
     }
 }
 
@@ -120,12 +119,19 @@ function newAssignment(jsonData) {
 
 // Function to populate the HTML List of assignments
 function populateAssignmentList() {
+    console.log(assignList.myClasses)
     for (let i in assignList.myClasses) {
-        $('#assignment-list').append('<div>' + i[name] + '</div>')
+        console.log(i.aName)
+        var node = document.createElement("LI");                 // Create a <li> node
+        var textnode = document.createTextNode("Water");         // Create a text node
+        node.appendChild(textnode);                              // Append the text to <li>
+
+        console.log(document.getElementById('assignment-list'))
+        document.getElementById('assignment-list').appendChild(node)
 
     }
 }
-
+    
 //make all checks and update things run from inside this.
 $('document').ready(function() {
     $('#login').click(login)
@@ -133,13 +139,16 @@ $('document').ready(function() {
     $('#send').click(assignList.handleAddAssignment)
 
     firebase.on("child_changed", assignList.addAssignment)
-
-    // Temp test code for populateAssignmentList()
-    let testList = new Assignment('English', 'Lab', '12/13/03', '12:39', 'none','Lab 3')
-
-    assignList.myClasses.put(testList);
-    console.log(assignList)
-    populateAssignmentList;
-
-
 })
+
+function init() {
+// Temp test code for populateAssignmentList()
+    let testList = new Assignment('English', 'Lab', '12/13/03', '12:39', 'none','Lab 3')
+    let name = 'English'
+    assignList.myClasses[name] = testList;
+
+    console.log(assignList)
+    populateAssignmentList();
+}
+
+    window.onload = init;
