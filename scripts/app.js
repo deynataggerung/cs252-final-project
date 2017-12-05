@@ -132,7 +132,7 @@ $('document').ready(function() {
     $('#logout').click(logout)
     $('#send').click(assignList.handleAddAssignment)
 
-    firebase.onUpdate(assignList.addAssignment)
+    firebase.on("child_changed", assignList.addAssignment)
 
     // Temp test code for populateAssignmentList()
     let testList = new Assignment('English', 'Lab', '12/13/03', '12:39', 'none','Lab 3')

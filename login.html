@@ -1,0 +1,34 @@
+<html>
+<head>
+    <title> login </title>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+    <script src="scripts/jquery-3.0.0.min.js"></script>
+    <script src="scripts/login.js"></script>
+    <link rel='stylesheet' href='css/login.css' type='text/css' media='all' />
+
+</head>
+
+<body>
+
+    <!--login window-->
+    <center>
+        <br><br><br>
+        <div id = "login" >
+        <a><img class="logotype" src="images/" /></a>
+          <fieldset>
+            <h2>Welcome!</h2>
+
+            <input placeholder="username" id="username" type="text" name="Username" value="" size="25" maxlength="25" autocomplete="false"><br>
+
+            <br>
+
+            <input placeholder="password" id="password" type="password" name="Password" value="" size="25" maxlength="25" autocomplete="off"/><br>
+            <p id="loginFeedback"> </p>
+            
+            <button id="enter">Login</button>
+
+          </fieldset>
+
+        </div>
+    </center>
+</body>
