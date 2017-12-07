@@ -117,7 +117,6 @@ function populateUILists() {
     console.log(currClassList.myClasses)
     for (let i in currClassList.myClasses) {
         console.log(i)
-
         let classHtml = '<div class="w3-padding w3-container">'
         classHtml += i
         classHtml += '</div>'
@@ -142,6 +141,12 @@ function populateUILists() {
 //adds class from input
 function handleAddClass() {
     const classInput = document.getElementById('class-name-field')
+    if (currClassList.myClasses.hasOwnProperty(classInput.value))
+    {
+        classInput.value = ""
+        alert("You already have already added a class with that name!")
+        return;
+    }
     currClassList.myClasses[classInput.value] = []
     console.log(currClassList)
 
