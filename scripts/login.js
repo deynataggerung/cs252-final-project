@@ -26,14 +26,29 @@ function login(e) {
         document.getElementById("password").value
         ).catch(function(error) {
             console.log("login failed")
-            return false;
         });
-    userID = document.getElementById("username").value
-
-    window.location.href = 'index.html'
+    if (firebase.auth().currentUser) {
+        window.location.href = 'index.html'
+    }
+    else {
+        document.getElementById("loginFeedback").innerHTML = "The username or password you entered is incorrect"
+    }
     return true;
 }
 
+function showSignup() {
+    $("#login").css("display", "none")
+    $('#signup').css("display", "block")
+}
+
+function showLogin() {
+    $("#signup").css("display", "none")
+    $('#login').css("display", "block")  
+}
+
 $('document').ready(function() {
-    $("#enter").click(login);
+    $("#enterL").click(login)
+    $("#enterS").click(signup)
+    $('#showLogin').click(showLogin)
+    $('#showSignup').click(showSignup)
 })

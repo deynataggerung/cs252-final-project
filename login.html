@@ -4,6 +4,8 @@
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
     <script src="scripts/jquery-3.0.0.min.js"></script>
     <script src="scripts/login.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
     <link rel='stylesheet' href='css/login.css' type='text/css' media='all' />
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -15,10 +17,10 @@
     <!--login window-->
     <center>
         <br><br><br>
-        <div id = "login" >
-        <a><img class="logotype" src="images/" /></a>
+        <div id="login">
+          <a><img class="logotype" src="images/" /></a>
           <fieldset>
-            <h2>Welcome!</h2>
+            <h2>Welcome Back</h2>
 
             <input placeholder="username" id="username" type="text" name="Username" value="" size="25" maxlength="25" autocomplete="false"><br>
 
@@ -27,7 +29,27 @@
             <input placeholder="password" id="password" type="password" name="Password" value="" size="25" maxlength="25" autocomplete="off"/><br>
             <p id="loginFeedback"> </p>
             
-            <button id="enter">Login</button>
+            <button id="enterL">Login</button>
+            <button id="showSignup">Sign Up</button>
+
+          </fieldset>
+
+        </div>
+
+    <!--signup window-->
+        <div id="signup">
+          <a><img class="logotype" src="images/" /></a>
+          <fieldset>
+            <h2>Welcome to OnTyme</h2>
+
+            <input placeholder="username" id="sUsername" type="text" name="Username" value="" size="25" maxlength="25" autocomplete="false"><br>
+
+            <br>
+
+            <input placeholder="password" id="sPassword" type="password" name="Password" value="" size="25" maxlength="25" autocomplete="off"/><br>
+            <p id="signupFeedback"> </p>
+            
+            <button id="enterS">Sign Up</button>
 
           </fieldset>
 

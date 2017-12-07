@@ -64,7 +64,7 @@ var authData = firebase.auth();
 var assignList = new AssignmentList();
 
 //storage for a username and password, replace this with whatever makes sense
-var userID;
+var userID = firebase.auth().currentUser;
 
 //call this function to login with values in the "username" and "password" text boxes
 //this will call the above function
@@ -146,7 +146,15 @@ $('document').ready(function() {
     $('#send').click(assignList.handleAddAssignment)
 
     firebase.on("child_changed", assignList.addAssignment)
+
+    
 })
+
+/*code for making sure people are logged in
+if (!userID) {
+    window.location.href = 'login.html'
+}
+*/
 
 function init() {
 // Temp test code for populateAssignmentList()
@@ -157,5 +165,7 @@ function init() {
     console.log(assignList)
     populateAssignmentList();
 }
+
+    
 
 window.onload = init;
