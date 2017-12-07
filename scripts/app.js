@@ -10,16 +10,15 @@ var config = {
 firebase.initializeApp(config);
 
 var myDataRef = firebase.database().ref();
-
 // The data structure for an individual assignment
 class Assignment {
     constructor(course, aType, dueDate, dueTime, aDescription, aName) {
-        var course = course
-        var aName = aName
-        var aType = aType
-        var dueDate = dueDate
-        var dueTime = dueTime
-        var aDescription = aDescription
+        this.course = course
+        this.aName = aName
+        this.aType = aType
+        this.dueDate = dueDate
+        this.dueTime = dueTime
+        this.aDescription = aDescription
     }
 }
 
@@ -120,12 +119,26 @@ function newAssignment(jsonData) {
 
 // Function to populate the HTML List of assignments
 function populateAssignmentList() {
+    console.log(assignList.myClasses)
     for (let i in assignList.myClasses) {
-        $('#assignment-list').append('<div>' + i[name] + '</div>')
+        console.log(i)
+
+        $('#assignment-list').append('<li>')
+        $('#assignment-list').append('<span class="ass-aName">' + assignList.myClasses[i].aName + '</span>')
+        $('#assignment-list').append('<span class="ass-course">' + assignList.myClasses[i].course + '</span>')
+        $('#assignment-list').append('<span class="ass-aType">' + assignList.myClasses[i].aType + '</span>')
+        $('#assignment-list').append('<span class="ass-dueDate">' + assignList.myClasses[i].dueDate + '</span>')
+        $('#assignment-list').append('<span class="ass-dueTime">' + assignList.myClasses[i].dueTime + '</span>')
+        $('#assignment-list').append('<span class="ass-desc">' + assignList.myClasses[i].description + '</span>')
+        $('#assignment-list').append('</li>')
 
     }
 }
 
+function handleAddClass() {
+    console.log("add class")
+}
+    
 //make all checks and update things run from inside this.
 $('document').ready(function() {
     $('#login').click(login)
@@ -133,13 +146,16 @@ $('document').ready(function() {
     $('#send').click(assignList.handleAddAssignment)
 
     firebase.on("child_changed", assignList.addAssignment)
-
-    // Temp test code for populateAssignmentList()
-    let testList = new Assignment('English', 'Lab', '12/13/03', '12:39', 'none','Lab 3')
-
-    assignList.myClasses.put(testList);
-    console.log(assignList)
-    populateAssignmentList;
-
-
 })
+
+function init() {
+// Temp test code for populateAssignmentList()
+    let testList = new Assignment('English', 'Lab', '12/13/03', '12:39', 'none','Lab 3')
+    let name = 'English'
+    assignList.myClasses[name] = testList;
+
+    console.log(assignList)
+    populateAssignmentList();
+}
+
+window.onload = init;
