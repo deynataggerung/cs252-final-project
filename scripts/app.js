@@ -23,15 +23,10 @@ class Assignment {
 }
 
 // The data structure for the Assignment List on the current page
-class AssignmentList {
+class ClassList {
     constructor() {
         this.myClasses = {}
-        //this.setupEventListeners()
     }
-
-    //setupEventListeners() {
-    //    document.querySelector('#add-assignment').addEventListener(this.handleAddAssignment.bind(this))
-    //}
 
     handleAddAssignment(ev) {
         ev.preventDefault()
@@ -61,7 +56,7 @@ class AssignmentList {
 
 //variable setup
 var authData = firebase.auth();
-var assignList = new AssignmentList();
+var currClassList = new ClassList();
 
 //storage for a username and password, replace this with whatever makes sense
 var userID;
@@ -103,7 +98,7 @@ function getUserData() {
     try {
         ref.orderByChild("dueDate").on("child_added", function(snapshot) {
             //doesn't check for duplicates
-            assignList.addAssignment(snapshot.val())
+            currClassList.addAssignment(snapshot.val())
         })
 
     }
@@ -118,44 +113,62 @@ function newAssignment(jsonData) {
 }
 
 // Function to populate the HTML List of assignments
-function populateAssignmentList() {
-    console.log(assignList.myClasses)
-    for (let i in assignList.myClasses) {
+function populateClassList() {
+    console.log(currClassList.myClasses)
+    for (let i in currClassList.myClasses) {
         console.log(i)
 
-        $('#assignment-list').append('<li>')
-        $('#assignment-list').append('<span class="ass-aName">' + assignList.myClasses[i].aName + '</span>')
-        $('#assignment-list').append('<span class="ass-course">' + assignList.myClasses[i].course + '</span>')
-        $('#assignment-list').append('<span class="ass-aType">' + assignList.myClasses[i].aType + '</span>')
-        $('#assignment-list').append('<span class="ass-dueDate">' + assignList.myClasses[i].dueDate + '</span>')
-        $('#assignment-list').append('<span class="ass-dueTime">' + assignList.myClasses[i].dueTime + '</span>')
-        $('#assignment-list').append('<span class="ass-desc">' + assignList.myClasses[i].description + '</span>')
-        $('#assignment-list').append('</li>')
+        let currHtml = '<div class="w3-padding w3-container">'
+        currHtml += '<span class="ass-aName">' + currClassList.myClasses[i].aName + '</span>'
+        currHtml += '<span class="ass-course">' + currClassList.myClasses[i].course + '</span>'
+        currHtml += '<span class="ass-aType">' + currClassList.myClasses[i].aType + '</span>'
+        currHtml += '<span class="ass-dueDate">' + currClassList.myClasses[i].dueDate + '</span>'
+        currHtml += '<span class="ass-dueTime">' + currClassList.myClasses[i].dueTime + '</span>'
+        currHtml += '<span class="ass-desc">' + currClassList.myClasses[i].description + '</span>'
+        currHtml += '</div>'
+        $('#assignment-list').append(currHtml)
+
+        /*
+        $('#assignment-list').append('<div class="w3-padding w3-container">')
+        $('#assignment-list').append('<span class="ass-aName">' + currClassList.myClasses[i].aName + '</span>')
+        $('#assignment-list').append('<span class="ass-course">' + currClassList.myClasses[i].course + '</span>')
+        $('#assignment-list').append('<span class="ass-aType">' + currClassList.myClasses[i].aType + '</span>')
+        $('#assignment-list').append('<span class="ass-dueDate">' + currClassList.myClasses[i].dueDate + '</span>')
+        $('#assignment-list').append('<span class="ass-dueTime">' + currClassList.myClasses[i].dueTime + '</span>')
+        $('#assignment-list').append('<span class="ass-desc">' + currClassList.myClasses[i].description + '</span>')
+        $('#assignment-list').append('</div>')
+        */
 
     }
 }
 
+
+//adds class from input
 function handleAddClass() {
-    console.log("add class")
+    const classInput = document.getElementById('class-name-field')
+    currClassList.myClasses[classInput.value] = []
+    console.log(currClassList)
+    classInput.value = ""
+
 }
     
 //make all checks and update things run from inside this.
 $('document').ready(function() {
     $('#login').click(login)
     $('#logout').click(logout)
-    $('#send').click(assignList.handleAddAssignment)
+    $('#send').click(currClassList.handleAddAssignment)
 
-    firebase.on("child_changed", assignList.addAssignment)
+    firebase.on("child_changed", currClassList.addAssignment)
 })
 
 function init() {
-// Temp test code for populateAssignmentList()
+// Temp test code for populateClassList()
     let testList = new Assignment('English', 'Lab', '12/13/03', '12:39', 'none','Lab 3')
     let name = 'English'
-    assignList.myClasses[name] = testList;
+    currClassList.myClasses[name] = testList;
 
-    console.log(assignList)
-    populateAssignmentList();
+    console.log(currClassList)
+    populateClassList();
 }
 
 window.onload = init;

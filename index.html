@@ -51,14 +51,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         <div class="w3-white">
           <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Classes</button>
           <div id="Demo1" class="w3-hide w3-container">
-            <p><input type="text" name="className" placeholder="Class name"></input>
-              <select name="classColor">
-                <option value="red">Red</option>
-                <option value="blue">Blue</option>
-                <option value="purple">Purple</option>
-              </select>
-            </p>
-            <button onclick="handleAddClass()" type="button" class="w3-button w3-theme">Add Class</button>
+            <!--<form id="class-form">-->
+              <p><input type="text" id="class-name-field" placeholder="Class name"></input>
+              </p>
+              <button onclick="handleAddClass()" type="button" class="w3-button w3-theme">Add Class</button>
+            <!--</form>-->
             <p></p>
           </div>
           <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align initially-hidden"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> My Assignments</button>
