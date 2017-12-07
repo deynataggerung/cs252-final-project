@@ -168,13 +168,7 @@ function handleLogOut() {
     if (confirm("Are you sure you want to log out?")) {
         window.location.href = "login.html"
 
-        // HEY
-        // MICAH
-        // ADD
-        // YOUR
-        // LOGOUT
-        // SCRIPT
-        // HERE
+        firebase.auth().signOut()
         
     }
 }
