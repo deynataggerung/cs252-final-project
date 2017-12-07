@@ -148,7 +148,7 @@ function handleAddClass() {
     //add to ui
     let classHtml = '<div class="w3-padding w3-container">'
     classHtml += classInput.value
-    classHtml += '<i class="plus">'
+    classHtml += '<button type="button" class="w3-button add-class-button"><i class="fa fa-plus"></button>'
     classHtml += '</div>'
     $('#actual-class-list').append(classHtml)
     
