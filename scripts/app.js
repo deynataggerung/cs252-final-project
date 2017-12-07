@@ -59,7 +59,7 @@ var authData = firebase.auth();
 var currClassList = new ClassList();
 
 //storage for a username and password, replace this with whatever makes sense
-var userID;
+var userID = firebase.auth().currentUser;
 
 //storing class that the current assignment is being added to
 var currClassName;
@@ -187,6 +187,7 @@ $('document').ready(function() {
     firebase.on("child_changed", currClassList.addAssignment)
 })
 
+
 function handleAddAssignmentToClass(ev) {
     const btn = ev.target
     //console.log(btn.parentElement.parentElement.textContent)
@@ -194,6 +195,13 @@ function handleAddAssignmentToClass(ev) {
     $('#add-assignment-div').show();
 
 }
+
+/*code for making sure people are logged in
+if (!userID) {
+    window.location.href = 'login.html'
+}
+*/
+
 
 function init() {
 
@@ -207,5 +215,7 @@ function init() {
     console.log(currClassList)
     populateUILists();
 }
+
+    
 
 window.onload = init;
