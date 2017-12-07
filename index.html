@@ -94,43 +94,12 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
     <!-- End Left Column -->
     </div>
     
-    <!-- Middle Column -->
-    <div class="w3-col m7 initially-hidden">
-      <div class="w3-row-padding">
-        <div class="w3-col m12">
-          <div class="w3-card w3-round w3-white">
-            <div class="w3-container w3-padding">
-              <h6 class="w3-opacity">Add an Assignment here</h6>
-              <form id="add-assignment">
-                <p> Class: <input list="courses" name="course">
-                <datalist id="courses"> <!-- Here go classes (via jquery) --></datalist></p>
-                <p> Assignment Type: <input list="aTypes" name="aType">
-                <datalist id="aTypes">
-                  <option value="Homework">
-                  <option value="Lab">
-                  <option value="Presentation">
-                  <option value="Quiz">
-                  <option value="Exam">
-                  <option value="Other">
-                </datalist></p>
-                <p> Assignment Name: <input type="text" name="name" placeholder="Title"></p>
-                <p> Due date: <input type="date" name="date"></p>
-                <p> Due date: <input type="time" name="time"></p>
-                <p> Description: <textarea name="description" rows="3" cols="20"></textarea></p>
-                <input type="submit" class="w3-button w3-theme" value="Add">
-              </form> 
-            </div>
-          </div>
-        </div>
-      </div>
-      
-    <!-- End Middle Column -->
-    </div>
 
     <!-- Middle Column 2 -->
     <div class="w3-col m7" id="show-assignment-div">
       <div class="w3-row-padding">
         <div class="w3-col m12">
+          <div class="initially-hidden">
           <div class="w3-card w3-round w3-white">
             <div class="w3-container w3-padding">
               <h6 class="w3-opacity">Add an Assignment here</h6>
@@ -154,9 +123,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
               </form> 
             </div>
           </div>
-        </div>
-      <div class="w3-row-padding">
-        <div class="w3-col m12">
+          <br>
+          </div>
           <div class="w3-card w3-round w3-white">
             <div class="w3-container w3-padding">
               <h6 class="w3-opacity">Assignments:</h6>
