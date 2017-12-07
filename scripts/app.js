@@ -122,14 +122,6 @@ function populateAssignmentList() {
     console.log(assignList.myClasses)
     for (let i in assignList.myClasses) {
         console.log(i)
-        /*
-        var node = document.createElement("LI");                 // Create a <li> node
-        var textnode = document.createTextNode("Water");         // Create a text node
-        node.appendChild(textnode);                              // Append the text to <li>
-
-        console.log(document.getElementById('assignment-list'))
-        document.getElementById('assignment-list').appendChild(node)
-        */
 
         $('#assignment-list').append('<li>')
         $('#assignment-list').append('<span class="ass-aName">' + assignList.myClasses[i].aName + '</span>')
@@ -141,6 +133,10 @@ function populateAssignmentList() {
         $('#assignment-list').append('</li>')
 
     }
+}
+
+function handleAddClass() {
+    console.log("add class")
 }
     
 //make all checks and update things run from inside this.
