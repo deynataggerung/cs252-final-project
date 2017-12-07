@@ -113,20 +113,28 @@ function newAssignment(jsonData) {
 }
 
 // Function to populate the HTML List of assignments
-function populateClassList() {
+function populateUILists() {
     console.log(currClassList.myClasses)
     for (let i in currClassList.myClasses) {
         console.log(i)
 
-        let currHtml = '<div class="w3-padding w3-container">'
-        currHtml += '<span class="ass-aName">' + currClassList.myClasses[i].aName + '</span>'
-        currHtml += '<span class="ass-course">' + currClassList.myClasses[i].course + '</span>'
-        currHtml += '<span class="ass-aType">' + currClassList.myClasses[i].aType + '</span>'
-        currHtml += '<span class="ass-dueDate">' + currClassList.myClasses[i].dueDate + '</span>'
-        currHtml += '<span class="ass-dueTime">' + currClassList.myClasses[i].dueTime + '</span>'
-        currHtml += '<span class="ass-desc">' + currClassList.myClasses[i].description + '</span>'
-        currHtml += '</div>'
-        $('#assignment-list').append(currHtml)
+        let classHtml = '<div class="w3-padding w3-container">'
+        classHtml += i
+        classHtml += '</div>'
+        $('#actual-class-list').append(classHtml)
+
+        for (let n in currClassList.myClasses[i]) {
+            console.log(n)
+            let currHtml = '<div class="w3-padding w3-container">'
+            currHtml += '<span class="ass-aName">' + currClassList.myClasses[i][n].aName + '</span>'
+            currHtml += '<span class="ass-course">' + currClassList.myClasses[i][n].course + '</span>'
+            currHtml += '<span class="ass-aType">' + currClassList.myClasses[i][n].aType + '</span>'
+            currHtml += '<span class="ass-dueDate">' + currClassList.myClasses[i][n].dueDate + '</span>'
+            currHtml += '<span class="ass-dueTime">' + currClassList.myClasses[i][n].dueTime + '</span>'
+            currHtml += '<span class="ass-desc">' + currClassList.myClasses[i][n].description + '</span>'
+            currHtml += '</div>'
+            $('#assignment-list').append(currHtml)
+        }
     }
 }
 
@@ -136,8 +144,16 @@ function handleAddClass() {
     const classInput = document.getElementById('class-name-field')
     currClassList.myClasses[classInput.value] = []
     console.log(currClassList)
-    classInput.value = ""
 
+    //add to ui
+    let classHtml = '<div class="w3-padding w3-container">'
+    classHtml += classInput.value
+    classHtml += '<i class="plus">'
+    classHtml += '</div>'
+    $('#actual-class-list').append(classHtml)
+    
+    //clear input
+    classInput.value = ""
 }
     
 //make all checks and update things run from inside this.
@@ -150,13 +166,16 @@ $('document').ready(function() {
 })
 
 function init() {
-// Temp test code for populateClassList()
-    let testList = new Assignment('English', 'Lab', '12/13/03', '12:39', 'none','Lab 3')
+
+    // Temp test code for populateUILists()
+    /*
+    let testList = [new Assignment('English', 'Lab', '12/13/03', '12:39', 'none','Lab 3'), new Assignment('English', 'Lab', '12/13/03', '12:34', 'none','Lab 5')]
     let name = 'English'
     currClassList.myClasses[name] = testList;
+    */
 
     console.log(currClassList)
-    populateClassList();
+    populateUILists();
 }
 
 window.onload = init;

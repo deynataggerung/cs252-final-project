@@ -8,6 +8,7 @@
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="scripts/jquery-3.0.0.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
 <script src="./scripts/app.js"></script>
@@ -51,11 +52,10 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         <div class="w3-white">
           <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Classes</button>
           <div id="Demo1" class="w3-hide w3-container">
-            <!--<form id="class-form">-->
-              <p><input type="text" id="class-name-field" placeholder="Class name"></input>
-              </p>
-              <button onclick="handleAddClass()" type="button" class="w3-button w3-theme">Add Class</button>
-            <!--</form>-->
+            <div id="actual-class-list"></div>
+            <p><input type="text" id="class-name-field" placeholder="Class name"></input>
+            </p>
+            <button onclick="handleAddClass()" type="button" class="w3-button w3-theme">Add Class</button>
             <p></p>
           </div>
           <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align initially-hidden"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> My Assignments</button>
