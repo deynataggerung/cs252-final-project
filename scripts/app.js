@@ -61,6 +61,9 @@ var currClassList = new ClassList();
 //storage for a username and password, replace this with whatever makes sense
 var userID;
 
+//storing class that the current assignment is being added to
+var currClassName;
+
 //call this function to login with values in the "username" and "password" text boxes
 //this will call the above function
 function login(e) {
@@ -144,7 +147,7 @@ function handleAddClass() {
     if (currClassList.myClasses.hasOwnProperty(classInput.value))
     {
         classInput.value = ""
-        alert("You already have already added a class with that name!")
+        alert("You have already added a class with that name!")
         return;
     }
     currClassList.myClasses[classInput.value] = []
@@ -153,7 +156,7 @@ function handleAddClass() {
     //add to ui
     let classHtml = '<div class="w3-padding w3-container">'
     classHtml += classInput.value
-    classHtml += '<button type="button" class="w3-button add-class-button"><i class="fa fa-plus"></button>'
+    classHtml += '<button type="button" onclick="handleAddAssignmentToClass(event)" class="w3-button add-class-button"><i class="fa fa-plus"></button>'
     classHtml += '</div>'
     $('#actual-class-list').append(classHtml)
     
@@ -183,6 +186,14 @@ $('document').ready(function() {
 
     firebase.on("child_changed", currClassList.addAssignment)
 })
+
+function handleAddAssignmentToClass(ev) {
+    const btn = ev.target
+    //console.log(btn.parentElement.parentElement.textContent)
+    currClassName = btn.parentElement.parentElement.textContent
+    $('#add-assignment-div').show();
+
+}
 
 function init() {
 
