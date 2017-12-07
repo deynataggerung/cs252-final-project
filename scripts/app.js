@@ -127,18 +127,6 @@ function populateClassList() {
         currHtml += '<span class="ass-desc">' + currClassList.myClasses[i].description + '</span>'
         currHtml += '</div>'
         $('#assignment-list').append(currHtml)
-
-        /*
-        $('#assignment-list').append('<div class="w3-padding w3-container">')
-        $('#assignment-list').append('<span class="ass-aName">' + currClassList.myClasses[i].aName + '</span>')
-        $('#assignment-list').append('<span class="ass-course">' + currClassList.myClasses[i].course + '</span>')
-        $('#assignment-list').append('<span class="ass-aType">' + currClassList.myClasses[i].aType + '</span>')
-        $('#assignment-list').append('<span class="ass-dueDate">' + currClassList.myClasses[i].dueDate + '</span>')
-        $('#assignment-list').append('<span class="ass-dueTime">' + currClassList.myClasses[i].dueTime + '</span>')
-        $('#assignment-list').append('<span class="ass-desc">' + currClassList.myClasses[i].description + '</span>')
-        $('#assignment-list').append('</div>')
-        */
-
     }
 }
 
