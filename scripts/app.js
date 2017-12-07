@@ -23,15 +23,10 @@ class Assignment {
 }
 
 // The data structure for the Assignment List on the current page
-class AssignmentList {
+class ClassList {
     constructor() {
         this.myClasses = {}
-        //this.setupEventListeners()
     }
-
-    //setupEventListeners() {
-    //    document.querySelector('#add-assignment').addEventListener(this.handleAddAssignment.bind(this))
-    //}
 
     handleAddAssignment(ev) {
         ev.preventDefault()
@@ -61,7 +56,7 @@ class AssignmentList {
 
 //variable setup
 var authData = firebase.auth();
-var assignList = new AssignmentList();
+var currClassList = new ClassList();
 
 //storage for a username and password, replace this with whatever makes sense
 var userID = firebase.auth().currentUser;
@@ -103,7 +98,7 @@ function getUserData() {
     try {
         ref.orderByChild("dueDate").on("child_added", function(snapshot) {
             //doesn't check for duplicates
-            assignList.addAssignment(snapshot.val())
+            currClassList.addAssignment(snapshot.val())
         })
 
     }
@@ -118,36 +113,75 @@ function newAssignment(jsonData) {
 }
 
 // Function to populate the HTML List of assignments
-function populateAssignmentList() {
-    console.log(assignList.myClasses)
-    for (let i in assignList.myClasses) {
+function populateUILists() {
+    console.log(currClassList.myClasses)
+    for (let i in currClassList.myClasses) {
         console.log(i)
+        let classHtml = '<div class="w3-padding w3-container">'
+        classHtml += i
+        classHtml += '</div>'
+        $('#actual-class-list').append(classHtml)
 
-        $('#assignment-list').append('<li>')
-        $('#assignment-list').append('<span class="ass-aName">' + assignList.myClasses[i].aName + '</span>')
-        $('#assignment-list').append('<span class="ass-course">' + assignList.myClasses[i].course + '</span>')
-        $('#assignment-list').append('<span class="ass-aType">' + assignList.myClasses[i].aType + '</span>')
-        $('#assignment-list').append('<span class="ass-dueDate">' + assignList.myClasses[i].dueDate + '</span>')
-        $('#assignment-list').append('<span class="ass-dueTime">' + assignList.myClasses[i].dueTime + '</span>')
-        $('#assignment-list').append('<span class="ass-desc">' + assignList.myClasses[i].description + '</span>')
-        $('#assignment-list').append('</li>')
-
+        for (let n in currClassList.myClasses[i]) {
+            console.log(n)
+            let currHtml = '<div class="w3-padding w3-container">'
+            currHtml += '<span class="ass-aName">' + currClassList.myClasses[i][n].aName + '</span>'
+            currHtml += '<span class="ass-course">' + currClassList.myClasses[i][n].course + '</span>'
+            currHtml += '<span class="ass-aType">' + currClassList.myClasses[i][n].aType + '</span>'
+            currHtml += '<span class="ass-dueDate">' + currClassList.myClasses[i][n].dueDate + '</span>'
+            currHtml += '<span class="ass-dueTime">' + currClassList.myClasses[i][n].dueTime + '</span>'
+            currHtml += '<span class="ass-desc">' + currClassList.myClasses[i][n].description + '</span>'
+            currHtml += '</div>'
+            $('#assignment-list').append(currHtml)
+        }
     }
 }
 
+
+//adds class from input
 function handleAddClass() {
-    console.log("add class")
+    const classInput = document.getElementById('class-name-field')
+    if (currClassList.myClasses.hasOwnProperty(classInput.value))
+    {
+        classInput.value = ""
+        alert("You already have already added a class with that name!")
+        return;
+    }
+    currClassList.myClasses[classInput.value] = []
+    console.log(currClassList)
+
+    //add to ui
+    let classHtml = '<div class="w3-padding w3-container">'
+    classHtml += classInput.value
+    classHtml += '<button type="button" class="w3-button add-class-button"><i class="fa fa-plus"></button>'
+    classHtml += '</div>'
+    $('#actual-class-list').append(classHtml)
+    
+    //clear input
+    classInput.value = ""
 }
     
+function handleLogOut() {
+    if (confirm("Are you sure you want to log out?")) {
+        window.location.href = "login.html"
+
+        // HEY
+        // MICAH
+        // ADD
+        // YOUR
+        // LOGOUT
+        // SCRIPT
+        // HERE
+        
+    }
+}
 //make all checks and update things run from inside this.
 $('document').ready(function() {
     $('#login').click(login)
     $('#logout').click(logout)
-    $('#send').click(assignList.handleAddAssignment)
+    $('#send').click(currClassList.handleAddAssignment)
 
-    firebase.on("child_changed", assignList.addAssignment)
-
-    
+    firebase.on("child_changed", currClassList.addAssignment)
 })
 
 /*code for making sure people are logged in
@@ -157,13 +191,16 @@ if (!userID) {
 */
 
 function init() {
-// Temp test code for populateAssignmentList()
-    let testList = new Assignment('English', 'Lab', '12/13/03', '12:39', 'none','Lab 3')
-    let name = 'English'
-    assignList.myClasses[name] = testList;
 
-    console.log(assignList)
-    populateAssignmentList();
+    // Temp test code for populateUILists()
+    /*
+    let testList = [new Assignment('English', 'Lab', '12/13/03', '12:39', 'none','Lab 3'), new Assignment('English', 'Lab', '12/13/03', '12:34', 'none','Lab 5')]
+    let name = 'English'
+    currClassList.myClasses[name] = testList;
+    */
+
+    console.log(currClassList)
+    populateUILists();
 }
 
     
