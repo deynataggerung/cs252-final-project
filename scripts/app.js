@@ -61,7 +61,7 @@ var authData = firebase.auth();
 var currClassList = new ClassList();
 
 //storage for a username and password, replace this with whatever makes sense
-var userID = firebase.auth().currentUser;
+var userID = firebase.auth().currentUser;;
 
 //storing class that the current assignment is being added to
 var currClassName = "";
@@ -167,6 +167,11 @@ function handleAddClass() {
         alert("You have already added a class with that name!")
         return;
     }
+    if (classInput.value=="")
+    {
+        alert("Please enter a valid name for the class!")
+        return;
+    }
     currClassList.myClasses[classInput.value] = []
     console.log(currClassList)
 
@@ -191,7 +196,7 @@ $('document').ready(function() {
     $('#logout').click(logout)
     $('#send').click(currClassList.handleAddAssignment)
 
-    firebase.on("child_changed", currClassList.addAssignment)
+    //firebase.on("child_changed", currClassList.addAssignment)
 })
 
 
@@ -278,6 +283,8 @@ function init() {
 
     console.log(currClassList)
     populateUILists();
+
+    userID = firebase.auth().currentUser;
 
     //document.getElementById('add-assignment').addEventListener('submit', handleAddAssignment)
 }
