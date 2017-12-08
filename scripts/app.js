@@ -91,6 +91,10 @@ function getUserData() {
     }
 }
 
+function deleteAssignment(jsonData) {
+
+}
+
 function newAssignment(jsonData) {
     var usersRef = myDataRef.child("users").child(userID);
     var newDataPoint = usersRef.push();
@@ -253,7 +257,7 @@ function handleAddAssignmentForm(ev) {
         aType: f.aType.value,
         dueDate: f.dueDate.value,
         dueTime: f.dueTime.value,
-        description: f.aDescription.value,
+        aDescription: f.aDescription.value,
         aName: f.aName.value,
         complete: false
     }
