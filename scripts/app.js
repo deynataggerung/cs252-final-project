@@ -421,6 +421,15 @@ function handleFilterByClass(ev) {
     const div = ev.target
     console.log(div)
     div.focus();
+    const className = div.textContent
+
+    $('.assignment-item').each(function() {
+        var elementClass = $(this).find('div > div > span.ass-course').text()
+
+        if (elementClass != className) {
+            $(this).hide()
+        }
+    })
 }
 
 function init() {
