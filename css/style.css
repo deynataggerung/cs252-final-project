@@ -2,6 +2,9 @@
     display: none;
 }
 
+.strikethrough {
+    text-decoration: line-through;
+}
 .assignment-class-btn-div {
     float: right;
 }

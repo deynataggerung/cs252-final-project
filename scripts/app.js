@@ -139,7 +139,13 @@ function populateUILists() {
 
         for (let n in currClassList.myClasses[i]) {
             console.log(n)
-            let currHtml = '<div class="w3-padding w3-container">'
+            let currHtml = '<div class="w3-padding w3-container'
+
+            if (currClassList.myClasses[i][n].complete) {
+                currHtml += ' strikethrough'
+            }
+            
+            currHtml += '">'
             currHtml += '<span class="ass-aName">' + currClassList.myClasses[i][n].aName + '</span>'
             currHtml += '<span class="ass-course">' + currClassList.myClasses[i][n].course + '</span>'
             currHtml += '<span class="ass-aType">' + currClassList.myClasses[i][n].aType + '</span>'
@@ -152,7 +158,12 @@ function populateUILists() {
             currHtml += '<button class="delete-assignment-btn assignment-class-btns" onclick="handleDeleteAssignment(event)"><i class="fa fa-trash-o"></i></button>'
             currHtml += '</div>'
             currHtml += '</div>'
-            $('#assignment-list').append(currHtml)
+            
+            if (currClassList.myClasses[i][n].complete) {
+                $('#assignment-list').append(currHtml)
+            } else {
+                $('#assignment-list').prepend(currHtml)
+            }
         }
     }
 }
@@ -230,7 +241,8 @@ function handleAddAssignmentForm(ev) {
         dueDate: f.dueDate.value,
         dueTime: f.dueTime.value,
         description: f.aDescription.value,
-        aName: f.aName.value
+        aName: f.aName.value,
+        complete: false
     }
     console.log(assignment)
 
@@ -266,7 +278,23 @@ function handleDeleteAssignment(ev) {
 }
 
 function handleFinishAssignment(ev) {
+    const btn = ev.target
+    //const assDiv = btn.parentElement.parentElement.parentElement
+    const assName = btn.parentElement.parentElement.parentElement.querySelector('.ass-aName').textContent
+    const assCourse = btn.parentElement.parentElement.parentElement.querySelector('.ass-course').textContent
 
+    //console.log(assDiv)
+    //assDiv.setAttribute('style', 'text-decoration: line-through')
+
+    for(let i = 0; i < currClassList.myClasses[assCourse].length; i++) {
+        if (currClassList.myClasses[assCourse][i].aName == assName) {
+            currClassList.myClasses[assCourse][i].complete = true
+        }
+    }
+
+    console.log(currClassList)
+
+    populateUILists();
 }
 
 function handleEditAssignment(ev) {
