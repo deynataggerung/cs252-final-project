@@ -341,7 +341,7 @@ function init() {
     console.log(currClassList)
     populateUILists();
 
-    userID = firebase.auth().currentUser;
+    console.log(firebase.auth().currentUser);
 
     //document.getElementById('add-assignment').addEventListener('submit', handleAddAssignment)
 }

@@ -20,32 +20,38 @@ var userID;
 //call this function to login with values in the "username" and "password" text boxes
 //this will call the above function
 function login() {
-    let valid = firebase.auth().signInWithEmailAndPassword(
+    firebase.auth().signInWithEmailAndPassword(
         document.getElementById("username").value,
         document.getElementById("password").value
         ).catch(function(error) {
             console.log("login failed")
         });
+    setTimeout(function() {
+        document.getElementById("enterS").innerHTML("submitted")
+    }, 1000)
     if (firebase.auth().currentUser) {
         window.location.href = 'index.html'
     }
     else {
         document.getElementById("loginFeedback").innerHTML = "The email or password you entered is incorrect"
-    }
-    return true;
+    } 
+    return false;
 }
 
 function signup() {
     var success = true;
-    firebase.auth().createUserWithEmailAndPassword(document.getElementById("sUsername").value, document.getElementById("sPassword").value)/*.catch(function(error) {
-            console.log("signup failed")
-            document.getElementById("signupFeedback").innerHTML = "The email and password combination is invalid"
-            success = false
-        })*/
-    if (success) {
+    firebase.auth().createUserWithEmailAndPassword(
+        document.getElementById("sUsername").value, 
+        document.getElementById("sPassword").value).catch(function(error) {
+            console.log("signup failed");
+            document.getElementById("signupFeedback").innerHTML = error.message;
+            success = false;
+        })
+    setTimeout(function() {
         location.reload();
-    }
-    return true;
+    }, 2500)
+
+    return false;
 }
 
 function showSignup() {
