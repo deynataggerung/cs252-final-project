@@ -97,7 +97,7 @@ function logout() {
 function getUserData() {
     var ref = myDataRef.child("users").child(userID);
     try {
-        ref.orderByChild("dueDate").on("child_added", function(snapshot) {
+        ref.on("child_added", function(snapshot) {
             //doesn't check for duplicates
             currClassList.addAssignment(snapshot.val())
         })
