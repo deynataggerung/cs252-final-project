@@ -179,7 +179,7 @@ function populateUILists() {
             currHtml += '<button class="edit-assignment-btn assignment-class-btns" onclick="handleEditAssignment(event)"><i class="fa fa-pencil"></i></button>'
             currHtml += '<button class="delete-assignment-btn assignment-class-btns" onclick="handleDeleteAssignment(event)"><i class="fa fa-trash-o"></i></button>'
             currHtml += '</span><br>'
-            currHtml += '<div class="ass-desc assignment-individual-div initially-hidden">' + currClassList.myClasses[className][currAssignment].description + '</div>'
+            currHtml += '<div class="ass-desc assignment-individual-div initially-hidden">' + currClassList.myClasses[className][currAssignment].aDescription + '</div>'
             currHtml += '</div>'
             
             if (currClassList.myClasses[className][currAssignment].complete) {
