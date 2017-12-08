@@ -145,7 +145,7 @@ function populateUILists() {
             currHtml += '<div class="assignment-btns-div">'
             currHtml += '<button class="done-assignment-btn assignment-btns" onclick="handleFinishAssignment(event)"><i class="fa fa-check"></i></button>'
             currHtml += '<button class="edit-assignment-btn assignment-btns" onclick="handleEditAssignment(event)"><i class="fa fa-pencil"></i></button>'
-            currHtml += '<button class="delete-assignment-btn assignment-btns onclick="handleDeleteAssignment(event)""><i class="fa fa-trash-o"></i></button>'
+            currHtml += '<button class="delete-assignment-btn assignment-btns" onclick="handleDeleteAssignment(event)"><i class="fa fa-trash-o"></i></button>'
             currHtml += '</div>'
             currHtml += '</div>'
             $('#assignment-list').append(currHtml)
@@ -198,6 +198,8 @@ $('document').ready(function() {
 function handleAddAssignmentToClass(ev) {
     const btn = ev.target
     //console.log(btn.parentElement.parentElement.textContent)
+    console.log(currClassName)
+    currClassName = ""
     currClassName = btn.parentElement.parentElement.textContent
     $('#add-assignment-div').show();
 
@@ -237,6 +239,33 @@ function handleAddAssignmentForm(ev) {
 
 }
 
+//Assignment button functions
+
+function handleDeleteAssignment(ev) {
+    const btn = ev.target
+
+    const assName = btn.parentElement.parentElement.parentElement.querySelector('.ass-aName').textContent
+    const assCourse = btn.parentElement.parentElement.parentElement.querySelector('.ass-course').textContent
+    //console.log(btn.parentElement.parentElement.parentElement.querySelector('.ass-aName').textContent)
+
+    console.log(currClassList)
+    for(let i = 0; i < currClassList.myClasses[assCourse].length; i++) {
+        if (currClassList.myClasses[assCourse][i].aName == assName) {
+            currClassList.myClasses[assCourse].splice(i, 1)
+            populateUILists()
+        }
+    }
+
+
+}
+
+function handleFinishAssignment(ev) {
+
+}
+
+function handleEditAssignment(ev) {
+
+}
 function init() {
 
     // Temp test code for populateUILists()
