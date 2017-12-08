@@ -246,6 +246,16 @@ function handleAddAssignmentForm(ev) {
     }
     console.log(assignment)
 
+    for (let i = 0; i < currClassList.myClasses[currClassName].length; i++) {
+        if ((currClassList.myClasses[currClassName][i].aName == assignment.aName) & (currClassList.myClasses[currClassName][i].course == assignment.course)) {
+            if (confirm("This will overwrite your previous assignment. Are you sure you want to proceed?")) {
+                currClassList.myClasses[currClassName].splice(i, 1)
+            } else {
+                return;
+            }
+        }
+    }
+
     currClassList.myClasses[currClassName].push(assignment);
     f.reset()
 
@@ -268,7 +278,7 @@ function handleDeleteAssignment(ev) {
 
     console.log(currClassList)
     for(let i = 0; i < currClassList.myClasses[assCourse].length; i++) {
-        if (currClassList.myClasses[assCourse][i].aName == assName) {
+        if ((currClassList.myClasses[assCourse][i].aName == assName) & (currClassList.myClasses[assCourse][i].course == assCourse)) {
             currClassList.myClasses[assCourse].splice(i, 1)
             populateUILists()
         }
@@ -287,7 +297,7 @@ function handleFinishAssignment(ev) {
     //assDiv.setAttribute('style', 'text-decoration: line-through')
 
     for(let i = 0; i < currClassList.myClasses[assCourse].length; i++) {
-        if (currClassList.myClasses[assCourse][i].aName == assName) {
+        if ((currClassList.myClasses[assCourse][i].aName == assName) & (currClassList.myClasses[assCourse][i].course == assCourse)) {
             currClassList.myClasses[assCourse][i].complete = true
         }
     }
@@ -299,7 +309,26 @@ function handleFinishAssignment(ev) {
 
 function handleEditAssignment(ev) {
 
+    const btn = ev.target
+    const assName = btn.parentElement.parentElement.parentElement.querySelector('.ass-aName').textContent
+    const assCourse = btn.parentElement.parentElement.parentElement.querySelector('.ass-course').textContent
+
+    let i = 0;
+    for(i = 0; i < currClassList.myClasses[assCourse].length; i++) {
+        if ((currClassList.myClasses[assCourse][i].aName == assName) & (currClassList.myClasses[assCourse][i].course == assCourse)) {
+            break;
+        }
+    }
+
+    document.getElementById('add-assignment').aType.value = currClassList.myClasses[assCourse][i].aType
+    document.getElementById('add-assignment').aName.value = currClassList.myClasses[assCourse][i].aName
+    document.getElementById('add-assignment').dueDate.value = currClassList.myClasses[assCourse][i].dueDate
+    document.getElementById('add-assignment').dueTime.value = currClassList.myClasses[assCourse][i].dueTime
+    document.getElementById('add-assignment').aDescription.value = currClassList.myClasses[assCourse][i].description
+
+    $('#add-assignment-div').show();
 }
+
 function init() {
 
     // Temp test code for populateUILists()
