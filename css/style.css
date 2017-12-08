@@ -6,3 +6,16 @@
     float: right;
     padding: 0px;
 }
+
+.assignment-btn-div {
+    float: right;
+}
+
+.assignment-btns {
+    background-color: Transparent;
+    /*background-repeat:no-repeat;*/
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
