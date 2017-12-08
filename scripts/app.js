@@ -163,6 +163,11 @@ function handleAddClass() {
         alert("You have already added a class with that name!")
         return;
     }
+    if (classInput.value=="")
+    {
+        alert("Please enter a valid name for the class!")
+        return;
+    }
     currClassList.myClasses[classInput.value] = []
     console.log(currClassList)
 
