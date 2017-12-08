@@ -361,25 +361,15 @@ function handleEditClass(ev) {
     oldClassName = classDiv.textContent;
     classDiv.contentEditable = "true"
     classDiv.focus()
-    /*
-    const btn = ev.target
-    const classToEdit = btn.parentElement.parentElement.parentElement
-    const classNameToEdit = btn.parentElement.parentElement.parentElement.textContent
-    currClassList.myClasses[editedClass] = currClassList.myClasses[classNameToEdit]
-    delete currClassList.myClasses[classNameToEdit]
-    populateUILists()
-
-
-    const btn = ev.target
-    const classNameToEdit = btn.parentElement.parentElement.parentElement.textContent
-    editedClass = "edited!!!"
-    currClassList.myClasses[classNameToEdit] = editedClass
-    */   
 }
 
 function handleSaveEditedClassName(ev) {
     console.log(oldClassName)
     const div = ev.target
+    console.log(div.textContent)
+    if (oldClassName == div.textContent) {
+        return
+    }
     currClassList.myClasses[div.textContent] = currClassList.myClasses[oldClassName]
     delete currClassList.myClasses[oldClassName];
     console.log(div)
