@@ -78,6 +78,7 @@ function logout() {
 //a setup function to be called on login that gets all the user's data
 function getUserData() {
     console.log(userID)
+    $('.welcome').text("Welcome, " + userID + "!")
     var ref = myDataRef.child("users").child(userID);
     try {
         ref.on("child_added", function(snapshot) {
@@ -208,7 +209,6 @@ $('document').ready(function() {
     $('#login').click(login)
     $('#logout').click(logout)
     $('#send').click(currClassList.handleAddAssignment)
-
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             userID = user.email;
