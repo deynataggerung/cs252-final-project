@@ -12,14 +12,14 @@ firebase.initializeApp(config);
 var myDataRef = firebase.database().ref();
 // The data structure for an individual assignment
 class Assignment {
-    constructor(course, aType, dueDate, dueTime, aDescription, aName) {
+    constructor(course, aType, dueDate, dueTime, aDescription, aName, complete) {
         this.course = course
         this.aName = aName
         this.aType = aType
         this.dueDate = dueDate
         this.dueTime = dueTime
         this.aDescription = aDescription
-        this.complete = false
+        this.complete = complete
     }
 }
 
@@ -50,9 +50,9 @@ class ClassList {
 */
     //use this to add new entries from the database
     addAssignment(snapshot) {
-        var assignment = Assignment(snapshot.course, snapshot.aType, snapshot.dueDate, snapshot.dueTime, snapshot.aDescription, snapshot.name);
+        var assignment = new Assignment(snapshot.course, snapshot.aType, snapshot.dueDate, snapshot.dueTime, snapshot.aDescription, snapshot.name, snapshot.complete);
         
-        this.myClasses.put(snapshot.course, assignment);
+        this.myClasses[snapshot.course] =  assignment;
     }
 }
 
@@ -95,6 +95,7 @@ function logout() {
 
 //a setup function to be called on login that gets all the user's data
 function getUserData() {
+    console.log(userID)
     var ref = myDataRef.child("users").child(userID);
     try {
         ref.on("child_added", function(snapshot) {
@@ -219,7 +220,18 @@ $('document').ready(function() {
     $('#logout').click(logout)
     $('#send').click(currClassList.handleAddAssignment)
 
-    //firebase.on("child_changed", currClassList.addAssignment)
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            userID = user.email;
+            let split = userID.search("@")
+            userID = userID.slice(0, split);
+
+            getUserData();
+            populateUILists();
+        } else {
+
+        }
+    })
 })
 
 
@@ -400,8 +412,10 @@ function init() {
     currClassList.myClasses[name] = testList;
     */
 
-    console.log(currClassList)
-    populateUILists();
+    //getUserData();
+
+    //populateUILists();
+
 
     //document.getElementById('add-assignment').addEventListener('submit', handleAddAssignment)
 }
