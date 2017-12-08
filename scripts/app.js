@@ -92,14 +92,10 @@ function logout() {
     });
     document.location.reload(true);
 }
-/*
-function addToPage() {
-    for (i = 0; i < )
-}
-*/
+
 //a setup function to be called on login that gets all the user's data
 function getUserData() {
-    var ref = myDataRef.ref(userID);
+    var ref = myDataRef.child("users").child(userID);
     try {
         ref.orderByChild("dueDate").on("child_added", function(snapshot) {
             //doesn't check for duplicates
@@ -108,17 +104,22 @@ function getUserData() {
 
     }
     catch(err) {
-        addUser(userID);
+
     }
 }
 
 function newAssignment(jsonData) {
     var usersRef = myDataRef.child("users").child(userID);
-    usersRef.set(jsonData)
+    var newDataPoint = usersRef.push();
+    newDataPoint.set(jsonData);
 }
 
 // Function to populate the HTML List of assignments
 function populateUILists() {
+    userID = firebase.auth().currentUser;
+    let split = userID.email.search("@")
+    userID = userID.email.slice(0, split)
+
     // Clearing contents of important fields
     $('#actual-class-list').empty()
     $('#assignment-list').empty()
@@ -193,6 +194,9 @@ function handleAddClass() {
     }
     currClassList.myClasses[classInput.value] = []
     console.log(currClassList)
+
+    //add to database
+
 
     //add to ui
     populateUILists();
@@ -273,6 +277,8 @@ function handleAddAssignmentForm(ev) {
     f.reset()
 
     $('#add-assignment-div').hide()
+
+    newAssignment(assignment);
 
     populateUILists()
     //save to stuff
@@ -396,8 +402,6 @@ function init() {
 
     console.log(currClassList)
     populateUILists();
-
-    console.log(firebase.auth().currentUser);
 
     //document.getElementById('add-assignment').addEventListener('submit', handleAddAssignment)
 }
