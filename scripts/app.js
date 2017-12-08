@@ -262,8 +262,8 @@ function handleAddAssignmentToClass(ev) {
     //console.log(btn.parentElement.parentElement.textContent)
     console.log(currClassName)
     currClassName = ""
-    currClassName = btn.parentElement.parentElement.parentElement.textContent
-    $('#add-assignment-div').show();
+    currClassName = btn.parentElement.parentElement.textContent
+		$('#add-assignment-div').show();
     console.log(currClassName)
 
 }
