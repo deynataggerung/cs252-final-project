@@ -329,6 +329,37 @@ function handleEditAssignment(ev) {
     $('#add-assignment-div').show();
 }
 
+<<<<<<< Updated upstream
+=======
+function handleDeleteClass(ev) {
+    const btn = ev.target
+    const classToDelete = btn.parentElement.parentElement.parentElement.textContent
+    console.log(classToDelete)
+    delete currClassList.myClasses[classToDelete]
+    console.log(currClassList.myClasses)
+    $('#add-assignment-div').hide()
+    populateUILists()
+}
+
+function handleEditClass(ev)
+{
+    /*const btn = ev.target
+    const classToEdit = btn.parentElement.parentElement.parentElement
+    const classNameToEdit = btn.parentElement.parentElement.parentElement.textContent
+    editedClass = "edited!!!"
+    currClassList.myClasses[editedClass] = currClassList.myClasses[classNameToEdit]
+    delete currClassList.myClasses[classNameToEdit]
+    populateUILists()
+
+
+    const btn = ev.target
+    const classNameToEdit = btn.parentElement.parentElement.parentElement.textContent
+    editedClass = "edited!!!"
+    currClassList.myClasses[classNameToEdit] = editedClass
+    */
+}
+
+>>>>>>> Stashed changes
 function init() {
 
     // Temp test code for populateUILists()
