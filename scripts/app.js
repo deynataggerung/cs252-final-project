@@ -145,10 +145,10 @@ function populateUILists() {
             let currHtml = '<div class="w3-padding w3-container assignment-item'
 
             if (currClassList.myClasses[i][n].complete) {
-                currHtml += ' strikethrough'
+                currHtml += ' strikethrough" data-date="3000-00-00">'
+            } else {
+                currHtml += '" data-date="' + currClassList.myClasses[i][n].dueDate + '">'
             }
-            
-            currHtml += '" data-date="' + currClassList.myClasses[i][n].dueDate + '">'
             currHtml += '<span class="ass-aName">' + currClassList.myClasses[i][n].aName + '</span>'
             currHtml += '<span class="ass-course">' + currClassList.myClasses[i][n].course + '</span>'
             currHtml += '<span class="ass-aType">' + currClassList.myClasses[i][n].aType + '</span>'
