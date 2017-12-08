@@ -93,7 +93,12 @@
 .assignment-individual-div {
     width: 100%;
 }
+
 .ass-format {
 	float:left;
 	width: 100%;
+}
+
+.assignment-item {
+    border-bottom: 1px solid black;
 }
