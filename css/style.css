@@ -42,3 +42,23 @@
 	width: 90%;
 	overflow: hidden;
 }
+
+.w3-opacity {
+	text-align: center;
+}
+
+.welcome {
+	text-align: center;
+}
+
+.footer {
+	position: fixed;
+    left: 0;
+    bottom: 0;
+    /*height: 100px;*/
+    width: 100%;
+}
+
+#div-that-needs-lower-margin {
+    margin-bottom: 100px;
+}

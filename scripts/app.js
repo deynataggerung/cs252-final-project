@@ -118,8 +118,8 @@ function newAssignment(jsonData) {
 // Function to populate the HTML List of assignments
 function populateUILists() {
     userID = firebase.auth().currentUser;
-    let split = userID.email.search("@")
-    userID = userID.email.slice(0, split)
+   /* let split = userID.email.search("@")
+    userID = userID.email.slice(0, split)*/
 
     // Clearing contents of important fields
     $('#actual-class-list').empty()
@@ -127,12 +127,12 @@ function populateUILists() {
 
     //Filling in UIs
     console.log(currClassList.myClasses)
-    for (let i in currClassList.myClasses) {
-        console.log(i)
+    for (let className in currClassList.myClasses) {
+        console.log(className)
         let classHtml = '<div class="w3-padding w3-container">'
-        classHtml += '<div class="class-name-div" onblur="handleSaveEditedClassName(event)">'
-        classHtml += i
-        classHtml += '</div>'
+        classHtml += '<span class="class-name-div" onblur="handleSaveEditedClassName(event)">'
+        classHtml += className
+        classHtml += '</span>'
         classHtml += '<div class="assignment-class-btn-div">'
         classHtml += '<button type="button" onclick="handleAddAssignmentToClass(event)" class="assignment-class-btns"><i class="fa fa-plus"></i></button>'
         classHtml += '<button type="button" onclick="handleEditClass(event)" class="assignment-class-btns"><i class="fa fa-pencil"></i></button>'
@@ -141,21 +141,21 @@ function populateUILists() {
         classHtml += '</div>'
         $('#actual-class-list').append(classHtml)
 
-        for (let n in currClassList.myClasses[i]) {
-            console.log(n)
+        for (let currAssignment in currClassList.myClasses[className]) {
+            console.log(currAssignment)
             let currHtml = '<div class="w3-padding w3-container assignment-item'
 
-            if (currClassList.myClasses[i][n].complete) {
-                currHtml += ' strikethrough'
+            if (currClassList.myClasses[className][currAssignment].complete) {
+                currHtml += ' strikethrough" data-date="3000-00-00">'
+            } else {
+                currHtml += '" data-date="' + currClassList.myClasses[className][currAssignment].dueDate + '">'
             }
-            
-            currHtml += '" data-date="' + currClassList.myClasses[i][n].dueDate + '">'
-            currHtml += '<span class="ass-aName">' + currClassList.myClasses[i][n].aName + '</span>'
-            currHtml += '<span class="ass-course">' + currClassList.myClasses[i][n].course + '</span>'
-            currHtml += '<span class="ass-aType">' + currClassList.myClasses[i][n].aType + '</span>'
-            currHtml += '<span class="ass-dueDate">' + currClassList.myClasses[i][n].dueDate + '</span>'
-            currHtml += '<span class="ass-dueTime">' + currClassList.myClasses[i][n].dueTime + '</span>'
-            currHtml += '<span class="ass-desc">' + currClassList.myClasses[i][n].description + '</span>'
+            currHtml += '<span class="ass-aName">' + currClassList.myClasses[className][currAssignment].aName + '</span>'
+            currHtml += '<span class="ass-course">' + currClassList.myClasses[className][currAssignment].course + '</span>'
+            currHtml += '<span class="ass-aType">' + currClassList.myClasses[className][currAssignment].aType + '</span>'
+            currHtml += '<span class="ass-dueDate">' + currClassList.myClasses[className][currAssignment].dueDate + '</span>'
+            currHtml += '<span class="ass-dueTime">' + currClassList.myClasses[className][currAssignment].dueTime + '</span>'
+            currHtml += '<span class="ass-desc">' + currClassList.myClasses[className][currAssignment].description + '</span>'
             currHtml += '<div class="assignment-class-btn-div">'
             currHtml += '<button class="done-assignment-btn assignment-class-btns" onclick="handleFinishAssignment(event)"><i class="fa fa-check"></i></button>'
             currHtml += '<button class="edit-assignment-btn assignment-class-btns" onclick="handleEditAssignment(event)"><i class="fa fa-pencil"></i></button>'
@@ -163,7 +163,7 @@ function populateUILists() {
             currHtml += '</div>'
             currHtml += '</div>'
             
-            if (currClassList.myClasses[i][n].complete) {
+            if (currClassList.myClasses[className][currAssignment].complete) {
                 $('#assignment-list').append(currHtml)
             } else {
                 $('#assignment-list').prepend(currHtml)
@@ -290,11 +290,9 @@ function handleAddAssignmentForm(ev) {
 
     $('#add-assignment-div').hide()
 
-    newAssignment(assignment);
+    //newAssignment(assignment);
 
     populateUILists()
-    //save to stuff
-    //newAssignment(assignment)
 
 }
 
