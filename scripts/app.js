@@ -99,9 +99,6 @@ function newAssignment(jsonData) {
 
 // Function to populate the HTML List of assignments
 function populateUILists() {
-    userID = firebase.auth().currentUser;
-   /* let split = userID.email.search("@")
-    userID = userID.email.slice(0, split)*/
 
     // Clearing contents of important fields
     $('#actual-class-list').empty()
@@ -275,7 +272,7 @@ function handleAddAssignmentForm(ev) {
 
     $('#add-assignment-div').hide()
 
-    //newAssignment(assignment);
+    newAssignment(assignment);
 
     populateUILists()
 
