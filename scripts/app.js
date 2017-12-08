@@ -32,7 +32,7 @@ class ClassList {
     //use this to add new entries from the database
     addAssignment(snapshot) {
         var assignment = new Assignment(snapshot.course, snapshot.aType, snapshot.dueDate, snapshot.dueTime, snapshot.aDescription, snapshot.aName, snapshot.complete);
-        
+        console.log(assignment.aDescription)
         this.myClasses[snapshot.course] = this.myClasses[snapshot.course] || [];
         this.myClasses[snapshot.course].push(assignment);
     }
@@ -212,8 +212,8 @@ $('document').ready(function() {
             userID = userID.slice(0, split);
 
             getUserData();
+            console.log(currClassList)
             setTimeout(function() {
-                console.log("here")
                 populateUILists()
             }, 1000)
         } else {
@@ -252,7 +252,7 @@ function handleAddAssignmentForm(ev) {
         alert("Please make sure you enter a valid date, time and name for the assignment before attempting to add it!")
         return;
     }
-    const assignment = {
+    const assignmentJSON = {
         course: currClassName,
         aType: f.aType.value,
         dueDate: f.dueDate.value,
@@ -262,9 +262,7 @@ function handleAddAssignmentForm(ev) {
         complete: false
     }
 
-    const assignment = new Assignment(currClassName, f.aType.value, f.dueDate.value, f.dueTime.value, f.aDescription.value, f.aName.value, false)
-
-    console.log(assignment)
+    var assignment = new Assignment(currClassName, f.aType.value, f.dueDate.value, f.dueTime.value, f.aDescription.value, f.aName.value, false)
 
     for (let i = 0; i < currClassList.myClasses[currClassName].length; i++) {
         if ((currClassList.myClasses[currClassName][i].aName == assignment.aName) && (currClassList.myClasses[currClassName][i].course == assignment.course)) {
@@ -276,12 +274,11 @@ function handleAddAssignmentForm(ev) {
         }
     }
 
-    currClassList.myClasses[currClassName].push(assignment);
     f.reset()
 
     $('#add-assignment-div').hide()
 
-    newAssignment(assignment);
+    newAssignment(assignmentJSON);
 
     populateUILists()
 
