@@ -107,3 +107,9 @@
 .class-focusable:focus {
     background: purple;
 }
+
+@media (max-width: 602px){
+    .footer { 
+        display : none; 
+        visibility : hidden; 
+    }
