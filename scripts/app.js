@@ -248,15 +248,9 @@ function handleAddAssignmentForm(ev) {
         alert("Please make sure you enter a valid date, time and name for the assignment before attempting to add it!")
         return;
     }
-    const assignment = {
-        course: currClassName,
-        aType: f.aType.value,
-        dueDate: f.dueDate.value,
-        dueTime: f.dueTime.value,
-        description: f.aDescription.value,
-        aName: f.aName.value,
-        complete: false
-    }
+
+    const assignment = new Assignment(currClassName, f.aType.value, f.dueDate.value, f.dueTime.value, f.aDescription.value, f.aName.value, false)
+
     console.log(assignment)
 
     for (let i = 0; i < currClassList.myClasses[currClassName].length; i++) {
@@ -371,6 +365,9 @@ function handleSaveEditedClassName(ev) {
     }
     currClassList.myClasses[div.textContent] = currClassList.myClasses[oldClassName]
     delete currClassList.myClasses[oldClassName];
+    for(let i = 0; i < currClassList.myClasses[div.textContent]; i++) {
+        currClassList.myClasses[div.textContent][i].course = div.textContent
+    }
     console.log(div)
     populateUILists()
 }
