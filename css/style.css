@@ -52,9 +52,13 @@
 }
 
 .footer {
-	position: absolute;
+	position: fixed;
     left: 0;
     bottom: 0;
     /*height: 100px;*/
     width: 100%;
+}
+
+#div-that-needs-lower-margin {
+    margin-bottom: 100px;
 }
