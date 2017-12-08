@@ -379,7 +379,7 @@ function handleEditAssignment(ev) {
     document.getElementById('add-assignment').aName.value = currClassList.myClasses[assCourse][i].aName
     document.getElementById('add-assignment').dueDate.value = currClassList.myClasses[assCourse][i].dueDate
     document.getElementById('add-assignment').dueTime.value = currClassList.myClasses[assCourse][i].dueTime
-    document.getElementById('add-assignment').aDescription.value = currClassList.myClasses[assCourse][i].description
+    document.getElementById('add-assignment').aDescription.value = currClassList.myClasses[assCourse][i].aDescription
 
     $('#add-assignment-div').show();
 }
