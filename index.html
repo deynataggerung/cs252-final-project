@@ -104,15 +104,15 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
             <div class="w3-container w3-padding">
               <h6 class="w3-opacity">Add an Assignment here</h6>
               <form id="add-assignment" onsubmit="handleAddAssigmnetForm(event)">
-                <p> Assignment Type: <input list="aTypes" name="aType">
-                <datalist id="aTypes">
-                  <option value="Homework">
-                  <option value="Lab">
-                  <option value="Presentation">
-                  <option value="Quiz">
-                  <option value="Exam">
-                  <option value="Other">
-                </datalist></p>
+                <p> Assignment Type:
+                <select name id="aTypes">
+                  <option value="Homework" selected>Homework</option>
+                  <option value="Lab">Lab</option>
+                  <option value="Presentation">Presentation</option>
+                  <option value="Quiz">Quiz</option>
+                  <option value="Exam">Exam</option>
+                  <option value="Other">Other</option>
+                </select></p>
                 <p> Assignment Name: <input type="text" name="aName" placeholder="Title"></p>
                 <p> Due date: <input type="date" name="dueDate"></p>
                 <p> Due time: <input type="time" name="dueTime"></p>
