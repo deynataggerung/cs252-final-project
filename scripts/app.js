@@ -142,13 +142,13 @@ function populateUILists() {
 
         for (let n in currClassList.myClasses[i]) {
             console.log(n)
-            let currHtml = '<div class="w3-padding w3-container'
+            let currHtml = '<div class="w3-padding w3-container assignment-item'
 
             if (currClassList.myClasses[i][n].complete) {
                 currHtml += ' strikethrough'
             }
             
-            currHtml += '">'
+            currHtml += '" data-date="' + currClassList.myClasses[i][n].dueDate + '">'
             currHtml += '<span class="ass-aName">' + currClassList.myClasses[i][n].aName + '</span>'
             currHtml += '<span class="ass-course">' + currClassList.myClasses[i][n].course + '</span>'
             currHtml += '<span class="ass-aType">' + currClassList.myClasses[i][n].aType + '</span>'
@@ -169,6 +169,12 @@ function populateUILists() {
             }
         }
     }
+
+    $('.assignment-item').sort(function(a, b) {
+        var d1 = new Date($(a).data('date'));
+        var d2 = new Date($(b).data('date'));
+        return d2 < d1 ? 1 : -1;
+    }).appendTo('#assignment-list')
 }
 
 
