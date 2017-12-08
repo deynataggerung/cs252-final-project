@@ -104,7 +104,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
             <div class="w3-container w3-padding">
               <h6 class="w3-opacity">Add an Assignment here</h6>
               <form id="add-assignment" onsubmit="handleAddAssignmentForm(event)">
-                <p> Assignment Type:
+                <div><p> Type:</p>
                 <select name id="aType">
                   <option value="Homework" selected>Homework</option>
                   <option value="Lab">Lab</option>
@@ -112,12 +112,22 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
                   <option value="Quiz">Quiz</option>
                   <option value="Exam">Exam</option>
                   <option value="Other">Other</option>
-                </select></p>
-                <p> Assignment Name: <input type="text" name="aName" placeholder="Title"></p>
-                <p> Due date: <input type="date" name="dueDate"></p>
-                <p> Due time: <input type="time" name="dueTime"></p>
-                <p> Description: <textarea name="aDescription" rows="3" cols="20"></textarea></p>
-                <button type="submit" class="w3-button w3-theme" value="Add">Submit</button>
+                </select></div>
+            
+
+                <div><p> Name: </p><input type="text" name="aName" placeholder="Title"></div>
+                
+
+                <div><p> Due date: </p><input type="date" name="dueDate"></div>
+                
+
+                <div><p> Due time: </p><input type="time" name="dueTime" value="23:59"></div>
+                
+                
+                <div><p> Description: </p><textarea name="aDescription" rows="3" cols="20"></textarea></div>
+                
+                
+                <div><button type="submit" class="w3-button w3-theme" value="Add">Submit</button></div>
               </form> 
             </div>
           </div>

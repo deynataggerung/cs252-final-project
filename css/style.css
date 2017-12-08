@@ -7,10 +7,35 @@
 }
 
 .assignment-class-btns {
-    background-color: Transparent;
-    /*background-repeat:no-repeat;*/
-    border: none;
-    cursor: pointer;
-    overflow: hidden;
-    outline: none;
+	background-color: Transparent;
+	/*background-repeat:no-repeat;*/
+	border: none;
+	cursor: pointer;
+	overflow: hidden;
+ 	outline: none;
+}
+
+#add-assignment * {
+  display: inline;
+  margin: auto;
+  padding: 10px;
+}
+
+#add-assignment p {
+	float: left;
+	width: 30%;
+	text-align: right;
+}
+
+#add-assignment input, #add-assignment textarea, #add-assignment select {
+	width: auto;
+	flex: 1;
+	overflow: hidden;
+	width: 100%;
+}
+
+#add-assignment div {
+	display: flex;
+	width: 90%;
+	overflow: hidden;
 }
