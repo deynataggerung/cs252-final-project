@@ -6,12 +6,11 @@
     text-decoration: line-through;
 }
 .assignment-class-btn-div {
-    float: right;
+    float: left;
 }
 
 .assignment-class-btns {
 	background-color: Transparent;
-	/*background-repeat:no-repeat;*/
 	border: none;
 	cursor: pointer;
 	overflow: hidden;
@@ -87,7 +86,10 @@
 
 }
 
+.assignment-individual-div {
+    width: 100%;
+}
 .ass-format {
 	float:left;
-	width: 80%;
+	width: 100%;
 }
