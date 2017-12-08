@@ -64,7 +64,7 @@ var currClassList = new ClassList();
 var userID = firebase.auth().currentUser;
 
 //storing class that the current assignment is being added to
-var currClassName;
+var currClassName = "";
 
 //call this function to login with values in the "username" and "password" text boxes
 //this will call the above function
@@ -129,7 +129,11 @@ function populateUILists() {
         console.log(i)
         let classHtml = '<div class="w3-padding w3-container">'
         classHtml += i
-        classHtml += '<button type="button" onclick="handleAddAssignmentToClass(event)" class="w3-button add-class-button"><i class="fa fa-plus"></button>'
+        classHtml += '<div class="assignment-class-btn-div">'
+        classHtml += '<button type="button" onclick="handleAddAssignmentToClass(event)" class="assignment-class-btns"><i class="fa fa-plus"></i></button>'
+        classHtml += '<button type="button" onclick="handleEditClass(event)" class="assignment-class-btns"><i class="fa fa-pencil"></i></button>'
+        classHtml += '<button type="button" onclick="handleDeleteClass(event)" class="assignment-class-btns"><i class="fa fa-trash-o"></i></button>'
+        classHtml += '</div>'
         classHtml += '</div>'
         $('#actual-class-list').append(classHtml)
 
@@ -142,10 +146,10 @@ function populateUILists() {
             currHtml += '<span class="ass-dueDate">' + currClassList.myClasses[i][n].dueDate + '</span>'
             currHtml += '<span class="ass-dueTime">' + currClassList.myClasses[i][n].dueTime + '</span>'
             currHtml += '<span class="ass-desc">' + currClassList.myClasses[i][n].description + '</span>'
-            currHtml += '<div class="assignment-btns-div">'
-            currHtml += '<button class="done-assignment-btn assignment-btns" onclick="handleFinishAssignment(event)"><i class="fa fa-check"></i></button>'
-            currHtml += '<button class="edit-assignment-btn assignment-btns" onclick="handleEditAssignment(event)"><i class="fa fa-pencil"></i></button>'
-            currHtml += '<button class="delete-assignment-btn assignment-btns" onclick="handleDeleteAssignment(event)"><i class="fa fa-trash-o"></i></button>'
+            currHtml += '<div class="assignment-class-btn-div">'
+            currHtml += '<button class="done-assignment-btn assignment-class-btns" onclick="handleFinishAssignment(event)"><i class="fa fa-check"></i></button>'
+            currHtml += '<button class="edit-assignment-btn assignment-class-btns" onclick="handleEditAssignment(event)"><i class="fa fa-pencil"></i></button>'
+            currHtml += '<button class="delete-assignment-btn assignment-class-btns" onclick="handleDeleteAssignment(event)"><i class="fa fa-trash-o"></i></button>'
             currHtml += '</div>'
             currHtml += '</div>'
             $('#assignment-list').append(currHtml)
@@ -167,11 +171,7 @@ function handleAddClass() {
     console.log(currClassList)
 
     //add to ui
-    let classHtml = '<div class="w3-padding w3-container">'
-    classHtml += classInput.value
-    classHtml += '<button type="button" onclick="handleAddAssignmentToClass(event)" class="w3-button add-class-button"><i class="fa fa-plus"></button>'
-    classHtml += '</div>'
-    $('#actual-class-list').append(classHtml)
+    populateUILists();
     
     //clear input
     classInput.value = ""
@@ -200,8 +200,9 @@ function handleAddAssignmentToClass(ev) {
     //console.log(btn.parentElement.parentElement.textContent)
     console.log(currClassName)
     currClassName = ""
-    currClassName = btn.parentElement.parentElement.textContent
+    currClassName = btn.parentElement.parentElement.parentElement.textContent
     $('#add-assignment-div').show();
+    console.log(currClassName)
 
 }
 
