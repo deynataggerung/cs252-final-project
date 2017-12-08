@@ -233,6 +233,7 @@ function handleLogOut() {
         
     }
 }
+
 //make all checks and update things run from inside this.
 $('document').ready(function() {
     $('#login').click(login)
@@ -250,7 +251,7 @@ $('document').ready(function() {
                 populateUILists()
             }, 1000)
         } else {
-
+            window.location.href = "login.html"
         }
     })
 })
