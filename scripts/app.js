@@ -117,8 +117,8 @@ function newAssignment(jsonData) {
 // Function to populate the HTML List of assignments
 function populateUILists() {
     userID = firebase.auth().currentUser;
-    let split = userID.email.search("@")
-    userID = userID.email.slice(0, split)
+   /* let split = userID.email.search("@")
+    userID = userID.email.slice(0, split)*/
 
     // Clearing contents of important fields
     $('#actual-class-list').empty()
@@ -129,9 +129,9 @@ function populateUILists() {
     for (let i in currClassList.myClasses) {
         console.log(i)
         let classHtml = '<div class="w3-padding w3-container">'
-        classHtml += '<div class="class-name-div" onblur="handleSaveEditedClassName(event)">'
+        classHtml += '<span class="class-name-div" onblur="handleSaveEditedClassName(event)">'
         classHtml += i
-        classHtml += '</div>'
+        classHtml += '</span>'
         classHtml += '<div class="assignment-class-btn-div">'
         classHtml += '<button type="button" onclick="handleAddAssignmentToClass(event)" class="assignment-class-btns"><i class="fa fa-plus"></i></button>'
         classHtml += '<button type="button" onclick="handleEditClass(event)" class="assignment-class-btns"><i class="fa fa-pencil"></i></button>'
@@ -278,11 +278,9 @@ function handleAddAssignmentForm(ev) {
 
     $('#add-assignment-div').hide()
 
-    newAssignment(assignment);
+    //newAssignment(assignment);
 
     populateUILists()
-    //save to stuff
-    //newAssignment(assignment)
 
 }
 
