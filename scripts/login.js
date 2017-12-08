@@ -27,6 +27,9 @@ function login() {
             console.log("login failed")
         });
 
+    document.getElementById("enterL").style["background-color"] = "#7fb14e"
+    document.getElementById("enterL").style["border-color"] = "#7fb14e"
+    document.getElementById("enterL").innerHTML = "Logging in..."
 
     setTimeout(function() {
         if (firebase.auth().currentUser) {
@@ -49,13 +52,24 @@ function signup() {
             document.getElementById("signupFeedback").innerHTML = error.message;
             success = false;
         })
+
+    if (!success) {
+        return false
+    }
+
+    document.getElementById("enterS").style["background-color"] = "#7fb14e"
+    document.getElementById("enterS").style["border-color"] = "#7fb14e"
+    document.getElementById("enterS").innerHTML = "Initializing..."
+
     setTimeout(function() {
         let userID = document.getElementById("sUsername").value;
         let split = userID.search("@");
         let token = userID.slice(0, split);
         let usersRef = myDataRef.child("users").child(token);
         usersRef.set("hello");
-        location.reload();
+
+
+        location.reload()
     }, 2500)
 
     return false;

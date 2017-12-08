@@ -115,7 +115,7 @@ button {
 }
 
 
-#loginFeedback {
+#loginFeedback, #signupFeedback{
   color: #800040;
   display block
   padding: 5;
