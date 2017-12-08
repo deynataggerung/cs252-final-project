@@ -127,6 +127,8 @@ function newAssignment(jsonData) {
 
 // Function to populate the HTML List of assignments
 function populateUILists() {
+    //resetting filter boolean
+    isSelected = false;
 
     // Clearing contents of important fields
     $('#actual-class-list').empty()
@@ -150,7 +152,7 @@ function populateUILists() {
 
         for (let currAssignment in currClassList.myClasses[className]) {
             console.log(currAssignment)
-            let currHtml = '<div class="w3-padding w3-container assignment-item'
+            let currHtml = '<div onclick="handleShowDescription(event)" class="w3-padding w3-container assignment-item'
 
             if (currClassList.myClasses[className][currAssignment].complete) {
                 currHtml += '" data-date="3000-00-00">'
@@ -176,8 +178,8 @@ function populateUILists() {
             currHtml += '<button class="done-assignment-btn assignment-class-btns" onclick="handleFinishAssignment(event)"><i class="fa fa-check"></i></button>'
             currHtml += '<button class="edit-assignment-btn assignment-class-btns" onclick="handleEditAssignment(event)"><i class="fa fa-pencil"></i></button>'
             currHtml += '<button class="delete-assignment-btn assignment-class-btns" onclick="handleDeleteAssignment(event)"><i class="fa fa-trash-o"></i></button>'
-            currHtml += '</span>'
-            currHtml += '<br><span class="ass-desc initially-hidden">' + currClassList.myClasses[className][currAssignment].description + '</span>'
+            currHtml += '</span><br>'
+            currHtml += '<div class="ass-desc assignment-individual-div initially-hidden">' + currClassList.myClasses[className][currAssignment].description + '</div>'
             currHtml += '</div>'
             
             if (currClassList.myClasses[className][currAssignment].complete) {
@@ -417,10 +419,16 @@ function handleSaveEditedClassName(ev) {
     populateUILists()
 }
 
+var isSelected = false;
 function handleFilterByClass(ev) {
+
+    if (isSelected) {
+        alert("Can't filter by more than one class at a time")
+        return;
+    }
     const div = ev.target
     console.log(div)
-    div.focus();
+    div.style.background = "#DCCFCC"
     const className = div.textContent
 
     $('.assignment-item').each(function() {
@@ -430,6 +438,22 @@ function handleFilterByClass(ev) {
             $(this).hide()
         }
     })
+    isSelected = true;
+}
+
+function handleShowDescription(ev) {
+    
+    const div = ev.target
+    console.log(div)
+    if (div.querySelector('div>div.ass-desc').style.display == "inline-block") {
+        //div.style.background = "";
+        div.querySelector('div>div.ass-desc').style.display = "none"
+    } else {
+        //div.style.background = "#DCCFCC"
+        div.querySelector('div>div.ass-desc').style.display = "inline-block"
+    }
+
+
 }
 
 function init() {
