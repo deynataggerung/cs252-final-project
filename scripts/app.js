@@ -29,30 +29,12 @@ class ClassList {
         this.myClasses = {}
     }
 
-/*
-    handleAddAssignment(ev) {
-        ev.preventDefault()
-        const f = ev.target
-
-        //the a stands for assignment i.e. assignment Type == aType
-        const assignment = {
-            course: f.course.value,
-            type: f.aType.value,
-            dueDate: f.dueDate.value,
-            dueTime: f.dueTime.value,
-            description: f.aDescription.value,
-            name: aName
-        }
-
-        //save to stuff
-        newAssignment(assignment)
-    }
-*/
     //use this to add new entries from the database
     addAssignment(snapshot) {
-        var assignment = new Assignment(snapshot.course, snapshot.aType, snapshot.dueDate, snapshot.dueTime, snapshot.aDescription, snapshot.name, snapshot.complete);
+        var assignment = new Assignment(snapshot.course, snapshot.aType, snapshot.dueDate, snapshot.dueTime, snapshot.aDescription, snapshot.aName, snapshot.complete);
         
-        this.myClasses[snapshot.course] =  assignment;
+        this.myClasses[snapshot.course] = this.myClasses[snapshot.course] || [];
+        this.myClasses[snapshot.course].push(assignment);
     }
 }
 
@@ -227,7 +209,10 @@ $('document').ready(function() {
             userID = userID.slice(0, split);
 
             getUserData();
-            populateUILists();
+            setTimeout(function() {
+                console.log("here")
+                populateUILists()
+            }, 1000)
         } else {
 
         }
