@@ -104,6 +104,21 @@ function deleteAssignment(assName) {
     })
 }
 
+function editAssignment(assignment) {
+    //hacky to only work for completing
+    var usersRef = myDataRef.child("users").child(userID);
+    usersRef.once("value", function(assignSnap) {
+        console.log(assignSnap)
+        assignSnap.forEach(function(newSnap) {
+            if (newSnap.child("aName").val() == assignment.aName) {
+                console.log(JSON.stringify(assignment))
+                console.log(newSnap.key)
+                usersRef.child(newSnap.key).update({"complete":assignment.complete})
+            }
+        })
+    })
+}
+
 function newAssignment(jsonData) {
     var usersRef = myDataRef.child("users").child(userID);
     var newDataPoint = usersRef.push();
@@ -334,10 +349,9 @@ function handleFinishAssignment(ev) {
     for(let i = 0; i < currClassList.myClasses[assCourse].length; i++) {
         if ((currClassList.myClasses[assCourse][i].aName == assName) && (currClassList.myClasses[assCourse][i].course == assCourse)) {
             currClassList.myClasses[assCourse][i].complete = true
+            editAssignment(currClassList.myClasses[assCourse][i])
         }
     }
-
-    console.log(currClassList)
 
     populateUILists();
 }
