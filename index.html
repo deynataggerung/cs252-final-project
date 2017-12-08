@@ -103,21 +103,9 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
           <div class="w3-card w3-round w3-white">
             <div class="w3-container w3-padding">
               <h6 class="w3-opacity">Add an Assignment here</h6>
-<<<<<<< HEAD
-              <form id="add-assignment" onsubmit="handleAddAssignment(event)">
-                <p> Assignment Type: <input list="aTypes" name="aType">
-                <datalist id="aTypes">
-                  <option value="Homework">
-                  <option value="Lab">
-                  <option value="Presentation">
-                  <option value="Quiz">
-                  <option value="Exam">
-                  <option value="Other">
-                </datalist></p>
-=======
-              <form id="add-assignment" onsubmit="handleAddAssigmnetForm(event)">
+              <form id="add-assignment" onsubmit="handleAddAssignmentForm(event)">
                 <p> Assignment Type:
-                <select name id="aTypes">
+                <select name id="aType">
                   <option value="Homework" selected>Homework</option>
                   <option value="Lab">Lab</option>
                   <option value="Presentation">Presentation</option>
@@ -125,7 +113,6 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
                   <option value="Exam">Exam</option>
                   <option value="Other">Other</option>
                 </select></p>
->>>>>>> 0476f2b9fd155af69528279d528d0dd8073fb066
                 <p> Assignment Name: <input type="text" name="aName" placeholder="Title"></p>
                 <p> Due date: <input type="date" name="dueDate"></p>
                 <p> Due time: <input type="time" name="dueTime"></p>
