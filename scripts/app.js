@@ -122,7 +122,7 @@ function populateUILists() {
     for (let className in currClassList.myClasses) {
         console.log(className)
         let classHtml = '<div class="w3-padding w3-container class-focusable" onclick="handleFilterByClass(event)">'
-        classHtml += '<span class="class-name-div" onblur="handleSaveEditedClassName(event)">'
+        classHtml += '<span class="class-name-div" onblur="handleSaveEditedClassName(event)"><i class="fa fa-filter"></i>&nbsp'
         classHtml += className
         classHtml += '</span>'
         classHtml += '<div class="assignment-class-btn-div">'
@@ -280,6 +280,10 @@ function handleAddAssignmentForm(ev) {
 
     var assignment = new Assignment(currClassName, f.aType.value, f.dueDate.value, f.dueTime.value, f.aDescription.value, f.aName.value, false)
 
+    console.log(currClassName)
+    console.log(currClassList)
+    console.log(currClassList[currClassName])
+    console.log(currClassList[currClassName].length)
     for (let i = 0; i < currClassList.myClasses[currClassName].length; i++) {
         if ((currClassList.myClasses[currClassName][i].aName == assignment.aName) && (currClassList.myClasses[currClassName][i].course == assignment.course)) {
             if (confirm("This will overwrite your previous assignment. Are you sure you want to proceed?")) {
