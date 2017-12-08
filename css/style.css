@@ -62,3 +62,32 @@
 #div-that-needs-lower-margin {
     margin-bottom: 100px;
 }
+
+.ass-aName {
+	float:left;
+}
+
+.ass-course {
+	float:left;
+}
+
+.ass-aType {
+	float:right;
+}
+
+.ass-dueDate {
+	float:right;
+}
+
+.ass-dueTime {
+	float:right;
+}
+
+.ass-desc {
+
+}
+
+.ass-format {
+	float:left;
+	width: 80%;
+}
