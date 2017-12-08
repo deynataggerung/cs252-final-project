@@ -235,6 +235,11 @@ function handleAddAssignmentForm(ev) {
 
 
     //the a stands for assignment i.e. assignment Type == aType
+    if (f.dueTime.value == "" || f.dueDate.value == "" || f.aName.value == "")
+    {
+        alert("Please make sure you enter a valid date, time and name for the assignment before attempting to add it!")
+        return;
+    }
     const assignment = {
         course: currClassName,
         aType: f.aType.value,
@@ -329,8 +334,6 @@ function handleEditAssignment(ev) {
     $('#add-assignment-div').show();
 }
 
-<<<<<<< Updated upstream
-=======
 function handleDeleteClass(ev) {
     const btn = ev.target
     const classToDelete = btn.parentElement.parentElement.parentElement.textContent
@@ -359,7 +362,6 @@ function handleEditClass(ev)
     */
 }
 
->>>>>>> Stashed changes
 function init() {
 
     // Temp test code for populateUILists()
