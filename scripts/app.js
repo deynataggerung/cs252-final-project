@@ -132,12 +132,14 @@ function populateUILists() {
             } else {
                 currHtml += '" data-date="' + currClassList.myClasses[className][currAssignment].dueDate + '">'
             }
+            currHtml += '<div class="ass-format">'
             currHtml += '<span class="ass-aName">' + currClassList.myClasses[className][currAssignment].aName + '</span>'
             currHtml += '<span class="ass-course">' + currClassList.myClasses[className][currAssignment].course + '</span>'
             currHtml += '<span class="ass-aType">' + currClassList.myClasses[className][currAssignment].aType + '</span>'
             currHtml += '<span class="ass-dueDate">' + currClassList.myClasses[className][currAssignment].dueDate + '</span>'
             currHtml += '<span class="ass-dueTime">' + currClassList.myClasses[className][currAssignment].dueTime + '</span>'
             currHtml += '<span class="ass-desc">' + currClassList.myClasses[className][currAssignment].description + '</span>'
+            currHtml += '</div>'
             currHtml += '<div class="assignment-class-btn-div">'
             currHtml += '<button class="done-assignment-btn assignment-class-btns" onclick="handleFinishAssignment(event)"><i class="fa fa-check"></i></button>'
             currHtml += '<button class="edit-assignment-btn assignment-class-btns" onclick="handleEditAssignment(event)"><i class="fa fa-pencil"></i></button>'
