@@ -28,6 +28,7 @@ class ClassList {
         this.myClasses = {}
     }
 
+/*
     handleAddAssignment(ev) {
         ev.preventDefault()
         const f = ev.target
@@ -45,7 +46,7 @@ class ClassList {
         //save to stuff
         newAssignment(assignment)
     }
-
+*/
     //use this to add new entries from the database
     addAssignment(snapshot) {
         var assignment = Assignment(snapshot.course, snapshot.aType, snapshot.dueDate, snapshot.dueTime, snapshot.aDescription, snapshot.name);
@@ -196,6 +197,29 @@ if (!userID) {
 }
 */
 
+function handleAddAssignment(ev) {
+    ev.preventDefault()
+    console.log(ev)
+    const f = ev.target
+
+    //the a stands for assignment i.e. assignment Type == aType
+    const assignment = {
+        course: currClassName,
+        type: f.aType.value,
+        dueDate: f.dueDate.value,
+        dueTime: f.dueTime.value,
+        description: f.aDescription.value,
+        name: f.aName.value
+    }
+    console.log(assignment)
+
+    currClassList.myClasses[currClassName].push(assignment);
+    
+
+    //save to stuff
+    //newAssignment(assignment)
+
+}
 
 function init() {
 
@@ -208,6 +232,8 @@ function init() {
 
     console.log(currClassList)
     populateUILists();
+
+    //document.getElementById('add-assignment').addEventListener('submit', handleAddAssignment)
 }
 
     

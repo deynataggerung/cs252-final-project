@@ -103,7 +103,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
           <div class="w3-card w3-round w3-white">
             <div class="w3-container w3-padding">
               <h6 class="w3-opacity">Add an Assignment here</h6>
-              <form id="add-assignment" onsubmit="handleAddAssigmnetForm(event)">
+              <form id="add-assignment" onsubmit="handleAddAssignment(event)">
                 <p> Assignment Type: <input list="aTypes" name="aType">
                 <datalist id="aTypes">
                   <option value="Homework">
@@ -117,7 +117,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
                 <p> Due date: <input type="date" name="dueDate"></p>
                 <p> Due time: <input type="time" name="dueTime"></p>
                 <p> Description: <textarea name="aDescription" rows="3" cols="20"></textarea></p>
-                <input type="submit" class="w3-button w3-theme" value="Add">
+                <button type="submit" class="w3-button w3-theme" value="Add">Add</button>
               </form> 
             </div>
           </div>
