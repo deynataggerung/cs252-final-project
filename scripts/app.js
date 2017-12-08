@@ -128,7 +128,9 @@ function populateUILists() {
     for (let i in currClassList.myClasses) {
         console.log(i)
         let classHtml = '<div class="w3-padding w3-container">'
+        classHtml += '<div class="class-name-div" onblur="handleSaveEditedClassName(event)">'
         classHtml += i
+        classHtml += '</div>'
         classHtml += '<div class="assignment-class-btn-div">'
         classHtml += '<button type="button" onclick="handleAddAssignmentToClass(event)" class="assignment-class-btns"><i class="fa fa-plus"></i></button>'
         classHtml += '<button type="button" onclick="handleEditClass(event)" class="assignment-class-btns"><i class="fa fa-pencil"></i></button>'
@@ -247,7 +249,7 @@ function handleAddAssignmentForm(ev) {
     console.log(assignment)
 
     for (let i = 0; i < currClassList.myClasses[currClassName].length; i++) {
-        if ((currClassList.myClasses[currClassName][i].aName == assignment.aName) & (currClassList.myClasses[currClassName][i].course == assignment.course)) {
+        if ((currClassList.myClasses[currClassName][i].aName == assignment.aName) && (currClassList.myClasses[currClassName][i].course == assignment.course)) {
             if (confirm("This will overwrite your previous assignment. Are you sure you want to proceed?")) {
                 currClassList.myClasses[currClassName].splice(i, 1)
             } else {
@@ -278,7 +280,7 @@ function handleDeleteAssignment(ev) {
 
     console.log(currClassList)
     for(let i = 0; i < currClassList.myClasses[assCourse].length; i++) {
-        if ((currClassList.myClasses[assCourse][i].aName == assName) & (currClassList.myClasses[assCourse][i].course == assCourse)) {
+        if ((currClassList.myClasses[assCourse][i].aName == assName) && (currClassList.myClasses[assCourse][i].course == assCourse)) {
             currClassList.myClasses[assCourse].splice(i, 1)
             populateUILists()
         }
@@ -297,7 +299,7 @@ function handleFinishAssignment(ev) {
     //assDiv.setAttribute('style', 'text-decoration: line-through')
 
     for(let i = 0; i < currClassList.myClasses[assCourse].length; i++) {
-        if ((currClassList.myClasses[assCourse][i].aName == assName) & (currClassList.myClasses[assCourse][i].course == assCourse)) {
+        if ((currClassList.myClasses[assCourse][i].aName == assName) && (currClassList.myClasses[assCourse][i].course == assCourse)) {
             currClassList.myClasses[assCourse][i].complete = true
         }
     }
@@ -315,7 +317,7 @@ function handleEditAssignment(ev) {
 
     let i = 0;
     for(i = 0; i < currClassList.myClasses[assCourse].length; i++) {
-        if ((currClassList.myClasses[assCourse][i].aName == assName) & (currClassList.myClasses[assCourse][i].course == assCourse)) {
+        if ((currClassList.myClasses[assCourse][i].aName == assName) && (currClassList.myClasses[assCourse][i].course == assCourse)) {
             break;
         }
     }
@@ -329,8 +331,7 @@ function handleEditAssignment(ev) {
     $('#add-assignment-div').show();
 }
 
-<<<<<<< Updated upstream
-=======
+
 function handleDeleteClass(ev) {
     const btn = ev.target
     const classToDelete = btn.parentElement.parentElement.parentElement.textContent
@@ -341,12 +342,18 @@ function handleDeleteClass(ev) {
     populateUILists()
 }
 
-function handleEditClass(ev)
-{
-    /*const btn = ev.target
+var oldClassName = ""
+function handleEditClass(ev) {
+
+    const btn = ev.target;
+    const classDiv = btn.parentElement.parentElement.parentElement.querySelector('.class-name-div')
+    oldClassName = classDiv.textContent;
+    classDiv.contentEditable = "true"
+    classDiv.focus()
+    /*
+    const btn = ev.target
     const classToEdit = btn.parentElement.parentElement.parentElement
     const classNameToEdit = btn.parentElement.parentElement.parentElement.textContent
-    editedClass = "edited!!!"
     currClassList.myClasses[editedClass] = currClassList.myClasses[classNameToEdit]
     delete currClassList.myClasses[classNameToEdit]
     populateUILists()
@@ -356,10 +363,18 @@ function handleEditClass(ev)
     const classNameToEdit = btn.parentElement.parentElement.parentElement.textContent
     editedClass = "edited!!!"
     currClassList.myClasses[classNameToEdit] = editedClass
-    */
+    */   
 }
 
->>>>>>> Stashed changes
+function handleSaveEditedClassName(ev) {
+    console.log(oldClassName)
+    const div = ev.target
+    currClassList.myClasses[div.textContent] = currClassList.myClasses[oldClassName]
+    delete currClassList.myClasses[oldClassName];
+    console.log(div)
+    populateUILists()
+}
+
 function init() {
 
     // Temp test code for populateUILists()
