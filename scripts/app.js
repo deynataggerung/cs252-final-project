@@ -91,8 +91,16 @@ function getUserData() {
     }
 }
 
-function deleteAssignment(jsonData) {
-
+function deleteAssignment(assName) {
+    var usersRef = myDataRef.child("users").child(userID);
+    usersRef.once("value", function(assignSnap) {
+        console.log(assignSnap)
+        assignSnap.forEach(function(newSnap) {
+            if (newSnap.child("aName").val() == assName) {
+                usersRef.child(newSnap.key).remove()
+            }
+        })
+    })
 }
 
 function newAssignment(jsonData) {
@@ -296,6 +304,8 @@ function handleDeleteAssignment(ev) {
     const assName = btn.parentElement.parentElement.parentElement.querySelector('.ass-aName').textContent
     const assCourse = btn.parentElement.parentElement.parentElement.querySelector('.ass-course').textContent
     //console.log(btn.parentElement.parentElement.parentElement.querySelector('.ass-aName').textContent)
+
+    deleteAssignment(assName)
 
     console.log(currClassList)
     for(let i = 0; i < currClassList.myClasses[assCourse].length; i++) {
