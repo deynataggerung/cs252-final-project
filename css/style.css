@@ -6,6 +6,10 @@
     text-decoration: line-through;
 }
 .assignment-class-btn-div {
+    float: right;
+}
+
+.assignment-btn-div {
     float: left;
 }
 
