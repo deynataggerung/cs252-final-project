@@ -78,6 +78,7 @@ function logout() {
 //a setup function to be called on login that gets all the user's data
 function getUserData() {
     console.log(userID)
+    $('.welcome').text("Welcome, " + userID + "!")
     var ref = myDataRef.child("users").child(userID);
     try {
         ref.on("child_added", function(snapshot) {
@@ -120,7 +121,7 @@ function populateUILists() {
     console.log(currClassList.myClasses)
     for (let className in currClassList.myClasses) {
         console.log(className)
-        let classHtml = '<div class="w3-padding w3-container">'
+        let classHtml = '<div class="w3-padding w3-container class-focusable" onclick="handleFilterByClass(event)">'
         classHtml += '<span class="class-name-div" onblur="handleSaveEditedClassName(event)">'
         classHtml += className
         classHtml += '</span>'
@@ -137,22 +138,26 @@ function populateUILists() {
             let currHtml = '<div class="w3-padding w3-container assignment-item'
 
             if (currClassList.myClasses[className][currAssignment].complete) {
-                currHtml += ' strikethrough" data-date="3000-00-00">'
+                currHtml += '" data-date="3000-00-00">'
             } else {
                 currHtml += '" data-date="' + currClassList.myClasses[className][currAssignment].dueDate + '">'
             }
             currHtml += '<div class="ass-format">'
-            currHtml += '<div>'
-            currHtml += '<span class="ass-aName">' + currClassList.myClasses[className][currAssignment].aName + '</span>'
-            currHtml += '<span class="ass-dueDate">' + currClassList.myClasses[className][currAssignment].dueDate + '</span>'
+            currHtml += '<div class="assignment-individual-div">'
+            currHtml += '<span class="ass-aName'
+            if (currClassList.myClasses[className][currAssignment].complete) {
+                currHtml += ' strikethrough'
+            }
+            currHtml += '">' + currClassList.myClasses[className][currAssignment].aName + '</span>'
             currHtml += '<span class="ass-dueTime">' + currClassList.myClasses[className][currAssignment].dueTime + '</span>'
+            currHtml += '<span class="ass-dueDate">' + currClassList.myClasses[className][currAssignment].dueDate + ',&nbsp</span>'
             currHtml += '</div>'
             currHtml += '<br>'
-            currHtml += '<div>'
+            currHtml += '<div class="assignment-individual-div">'
             currHtml += '<span class="ass-course">' + currClassList.myClasses[className][currAssignment].course + '</span>'
             currHtml += '<span class="ass-aType">' + currClassList.myClasses[className][currAssignment].aType + '</span>'
             currHtml += '</div>'
-            currHtml += '<span class="assignment-class-btn-div">'
+            currHtml += '<span class="assignment-btn-div">'
             currHtml += '<button class="done-assignment-btn assignment-class-btns" onclick="handleFinishAssignment(event)"><i class="fa fa-check"></i></button>'
             currHtml += '<button class="edit-assignment-btn assignment-class-btns" onclick="handleEditAssignment(event)"><i class="fa fa-pencil"></i></button>'
             currHtml += '<button class="delete-assignment-btn assignment-class-btns" onclick="handleDeleteAssignment(event)"><i class="fa fa-trash-o"></i></button>'
@@ -216,7 +221,6 @@ $('document').ready(function() {
     $('#login').click(login)
     $('#logout').click(logout)
     $('#send').click(currClassList.handleAddAssignment)
-
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             userID = user.email;
@@ -394,6 +398,12 @@ function handleSaveEditedClassName(ev) {
     }
     console.log(div)
     populateUILists()
+}
+
+function handleFilterByClass(ev) {
+    const div = ev.target
+    console.log(div)
+    div.focus();
 }
 
 function init() {

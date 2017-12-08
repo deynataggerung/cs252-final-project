@@ -3,15 +3,19 @@
 }
 
 .strikethrough {
-    text-decoration: line-through;
+    text-decoration: line-through !important;
+    color:green;
 }
 .assignment-class-btn-div {
     float: right;
 }
 
+.assignment-btn-div {
+    float: left;
+}
+
 .assignment-class-btns {
 	background-color: Transparent;
-	/*background-repeat:no-repeat;*/
 	border: none;
 	cursor: pointer;
 	overflow: hidden;
@@ -87,7 +91,19 @@
 
 }
 
+.assignment-individual-div {
+    width: 100%;
+}
+
 .ass-format {
 	float:left;
-	width: 80%;
+	width: 100%;
+}
+
+.assignment-item {
+    border-bottom: 1px solid black;
+}
+
+.class-focusable:focus {
+    background: purple;
 }
