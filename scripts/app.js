@@ -261,6 +261,9 @@ function handleAddAssignmentForm(ev) {
         aName: f.aName.value,
         complete: false
     }
+
+    const assignment = new Assignment(currClassName, f.aType.value, f.dueDate.value, f.dueTime.value, f.aDescription.value, f.aName.value, false)
+
     console.log(assignment)
 
     for (let i = 0; i < currClassList.myClasses[currClassName].length; i++) {
@@ -375,6 +378,9 @@ function handleSaveEditedClassName(ev) {
     }
     currClassList.myClasses[div.textContent] = currClassList.myClasses[oldClassName]
     delete currClassList.myClasses[oldClassName];
+    for(let i = 0; i < currClassList.myClasses[div.textContent]; i++) {
+        currClassList.myClasses[div.textContent][i].course = div.textContent
+    }
     console.log(div)
     populateUILists()
 }
