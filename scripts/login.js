@@ -26,15 +26,17 @@ function login() {
         ).catch(function(error) {
             console.log("login failed")
         });
+
+
     setTimeout(function() {
-        document.getElementById("enterS").innerHTML("submitted")
-    }, 1000)
-    if (firebase.auth().currentUser) {
-        window.location.href = 'index.html'
-    }
-    else {
-        document.getElementById("loginFeedback").innerHTML = "The email or password you entered is incorrect"
-    } 
+        if (firebase.auth().currentUser) {
+            window.location.href = 'index.html'
+        }     
+        else {
+            document.getElementById("loginFeedback").innerHTML = "The email or password you entered is incorrect"
+        } 
+    }, 2000)
+
     return false;
 }
 
@@ -48,6 +50,11 @@ function signup() {
             success = false;
         })
     setTimeout(function() {
+        let userID = document.getElementById("sUsername").value;
+        let split = userID.search("@");
+        let token = userID.slice(0, split);
+        let usersRef = myDataRef.child("users").child(token);
+        usersRef.set("hello");
         location.reload();
     }, 2500)
 
