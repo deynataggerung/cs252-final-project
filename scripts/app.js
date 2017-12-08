@@ -113,7 +113,7 @@ function populateUILists() {
     console.log(currClassList.myClasses)
     for (let className in currClassList.myClasses) {
         console.log(className)
-        let classHtml = '<div class="w3-padding w3-container">'
+        let classHtml = '<div class="w3-padding w3-container class-focusable" onclick="handleFilterByClass(event)">'
         classHtml += '<span class="class-name-div" onblur="handleSaveEditedClassName(event)">'
         classHtml += className
         classHtml += '</span>'
@@ -130,13 +130,17 @@ function populateUILists() {
             let currHtml = '<div class="w3-padding w3-container assignment-item'
 
             if (currClassList.myClasses[className][currAssignment].complete) {
-                currHtml += ' strikethrough" data-date="3000-00-00">'
+                currHtml += '" data-date="3000-00-00">'
             } else {
                 currHtml += '" data-date="' + currClassList.myClasses[className][currAssignment].dueDate + '">'
             }
             currHtml += '<div class="ass-format">'
             currHtml += '<div class="assignment-individual-div">'
-            currHtml += '<span class="ass-aName">' + currClassList.myClasses[className][currAssignment].aName + '</span>'
+            currHtml += '<span class="ass-aName'
+            if (currClassList.myClasses[className][currAssignment].complete) {
+                currHtml += ' strikethrough'
+            }
+            currHtml += '">' + currClassList.myClasses[className][currAssignment].aName + '</span>'
             currHtml += '<span class="ass-dueTime">' + currClassList.myClasses[className][currAssignment].dueTime + '</span>'
             currHtml += '<span class="ass-dueDate">' + currClassList.myClasses[className][currAssignment].dueDate + ',&nbsp</span>'
             currHtml += '</div>'
@@ -384,6 +388,12 @@ function handleSaveEditedClassName(ev) {
     }
     console.log(div)
     populateUILists()
+}
+
+function handleFilterByClass(ev) {
+    const div = ev.target
+    console.log(div)
+    div.focus();
 }
 
 function init() {
