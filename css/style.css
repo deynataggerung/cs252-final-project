@@ -103,3 +103,9 @@
 .assignment-item {
     border-bottom: 1px solid black;
 }
+
+@media (max-width: 602px){
+    .footer { 
+        display : none; 
+        visibility : hidden; 
+    }
